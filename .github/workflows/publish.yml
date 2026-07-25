@@ -29,7 +29,9 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Install Dependencies
-        run: npm ci --include=optional
+        run: |
+         npm ci --include=optional
+         npm rebuild @rollup/rollup-linux-x64-gnu
 
       - name: Build Library
         run: npm run build
