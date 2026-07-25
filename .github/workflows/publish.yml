@@ -30,8 +30,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
-         npm ci --include=optional
-         npm rebuild @rollup/rollup-linux-x64-gnu
+         npm ci
+         npm install --no-save @rollup/rollup-linux-x64-gnu
 
       - name: Build Library
         run: npm run build
