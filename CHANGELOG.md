@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.2](https://github.com/naresha-dev/devcore-ui/compare/v0.1.17...v0.2.2) (2026-07-25)
+
+
+### Features
+
+* scss imports fixes ([1ea1710](https://github.com/naresha-dev/devcore-ui/commit/1ea1710f45ea7e89b2909480725664845c34583a))
+
 ### [0.2.1](https://github.com/naresha-dev/devcore-ui/compare/v0.1.17...v0.2.1) (2026-07-25)
 
 ### [0.1.17](https://github.com/naresha-dev/devcore-ui/compare/v0.1.16...v0.1.17) (2026-06-01)
