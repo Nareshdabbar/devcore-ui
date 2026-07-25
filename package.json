@@ -1,6 +1,6 @@
 {
   "name": "@dev-core-ui/components",
-  "version": "0.1.17",
+  "version": "0.2.1",
   "description": "DevCore reusable UI components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -10,10 +10,10 @@
     "theme"
   ],
   "sideEffects": [
-    "*.scss"
+    "**/*.scss"
   ],
   "scripts": {
-    "build": "tsup && cpy theme dist --parents",
+    "build": "tsup && cpy \"src/theme/**/*\" theme --parents",
     "dev": "tsup --watch",
     "release": "standard-version"
   },
