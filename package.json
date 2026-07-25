@@ -1,19 +1,29 @@
 {
   "name": "@dev-core-ui/components",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "DevCore reusable UI components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./theme/*": "./theme/*",
+    "./dist/*": "./dist/*"
+  },
   "files": [
     "dist",
     "theme"
   ],
   "sideEffects": [
+    "**/*.css",
     "**/*.scss"
   ],
   "scripts": {
-    "build": "tsup && cpy \"src/theme/**/*\" theme --parents",
+    "build": "tsup && cpy \"src/theme/**/*\" theme",
     "dev": "tsup --watch",
     "release": "standard-version"
   },
@@ -21,15 +31,18 @@
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19"
   },
+  "dependencies": {
+    "clsx": "^2.1.1"
+  },
   "devDependencies": {
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "cpy-cli": "^6.0.0",
     "esbuild-sass-plugin": "^3.3.1",
-    "sass": "^1.96.0",
+    "sass": "^1.80.0",
     "standard-version": "^9.5.0",
-    "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0"
   },
   "license": "MIT",
   "publishConfig": {
@@ -37,16 +50,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/naresha-dev/devcore-ui"
-  },
-  "keywords": [
-    "react",
-    "ui",
-    "components",
-    "design-system",
-    "library"
-  ],
-  "dependencies": {
-    "clsx": "^2.1.1"
+    "url": "git+https://github.com/naresha-dev/devcore-ui.git"
   }
 }
