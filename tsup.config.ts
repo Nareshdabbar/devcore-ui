@@ -8,12 +8,9 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   external: ["react", "react-dom"],
-    esbuildPlugins: [
-      // sassPlugin({ type: "css" })
-          sassPlugin({
-      type: "local-css", // IMPORTANT: use css-module
+  esbuildPlugins: [
+    sassPlugin({
+      type: "local-css",
     }),
-
-    ], 
-    
+  ],
 });

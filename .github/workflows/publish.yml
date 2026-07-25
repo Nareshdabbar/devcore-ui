@@ -1,23 +1,46 @@
-name: Publish to NPM
+name: Release & Publish to NPM
+
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
+
+permissions:
+  contents: write
+
 jobs:
-  build-and-publish:
+  release-and-publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
-      # Fix: Remove ci (which relies on package-lock) and force a fresh install
-      - name: Clean install dependencies
+
+      - name: Configure Git User
         run: |
-          rm -rf node_modules package-lock.json
-          npm install
-      - run: npm run build
-      - run: npm publish
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Library
+        run: npm run build
+
+      - name: Bump Version & Update Changelog
+        run: npm run release
+
+      - name: Push Version & Tag to GitHub
+        run: git push --follow-tags origin main
+
+      - name: Publish to NPM
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

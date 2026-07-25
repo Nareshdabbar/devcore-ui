@@ -1,6 +1,6 @@
 // Default theme entry for DevCore UI.
 // This file defines the library's global CSS custom properties used by all components.
-// Use `theme.scss` as the canonical theme import.
+// src/theme/theme.scss
 @use "./variables" as *;
 :root {
   /* colors */
