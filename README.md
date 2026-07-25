@@ -30,17 +30,39 @@ npm install @dev-core-ui/components
 
 ## Quick Start
 
-### 1. Import Theme
+### 1. Enable Sass in your app
 
-Add the theme SCSS to your main CSS file:
+DevCore UI exports theme SCSS and uses CSS Modules. Your app must compile SCSS files from `node_modules`.
+
+If you do not already have Sass support, install it:
+
+```bash
+npm install sass
+```
+
+### 2. Import the theme once at app root
+
+In your global stylesheet, add:
 
 ```scss
 @import '@dev-core-ui/components/theme/theme.scss';
 ```
 
-> Note: `theme.scss` is the default theme entry. `light.scss` is kept only for backward compatibility and should not be used as a separate light-mode theme.
+Then import that stylesheet from your application entry, for example:
 
-### 2. Use Components
+```ts
+import './styles/global.scss';
+```
+
+If your bundler supports importing SCSS directly from JavaScript, you can also use:
+
+```ts
+import '@dev-core-ui/components/theme/theme.scss';
+```
+
+> Note: `theme.scss` is the library's default theme entry. It registers the CSS variables required by all components.
+
+### 3. Use components
 
 ```tsx
 import { Button, Input, Text } from '@dev-core-ui/components';
