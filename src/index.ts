@@ -1,4 +1,4 @@
-
+import "./theme/theme.scss";
 // Atom components exports
 export {
   Input,
