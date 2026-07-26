@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.52](https://github.com/naresha-dev/devcore-ui/compare/v0.2.51...v0.2.52) (2026-07-26)
+
+
+### Bug Fixes
+
+* **ci:** add guard clause to prevent infinite release loop ([23e542c](https://github.com/naresha-dev/devcore-ui/commit/23e542c41ab8fa73e2639948a589cfb0c38ef644))
+
 ### [0.2.51](https://github.com/naresha-dev/devcore-ui/compare/v0.2.50...v0.2.51) (2026-07-26)
 
 ### [0.2.50](https://github.com/naresha-dev/devcore-ui/compare/v0.2.49...v0.2.50) (2026-07-26)
