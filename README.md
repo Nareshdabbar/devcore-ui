@@ -16,7 +16,6 @@ Reusable React UI components with built-in theming support using CSS Variables.
 ```bash
 npm install @dev-core-ui/components
 
-
 import type { Metadata } from "next";
 import "@dev-core-ui/components/styles";
 
@@ -51,9 +50,9 @@ export default function App() {
   );
 }
 
-Available Components  
-Button  
-Primary, secondary, ghost, and danger variants with loading and disabled states.  
+Available Components
+Button
+Primary, secondary, ghost, and danger variants with loading and disabled states.
 
 Props
 
@@ -209,7 +208,6 @@ wrapperClassName: string
 
 style: CSSProperties
 <FileUpload label="Upload File" name="file" accept=".pdf,.doc" className="my-file-upload" />
-
 
 FormCard
 Container card for form layout sections.
