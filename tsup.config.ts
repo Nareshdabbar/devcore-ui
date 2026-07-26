@@ -7,11 +7,11 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
+  injectStyle: false, // Prevents inline style injection and emits dist/index.css
   external: ["react", "react-dom"],
   esbuildPlugins: [
     sassPlugin({
-      // Dynamically assign "local-css" to *.module.scss and "css" to global scss
-      type: (args) => (/\.module\.(s[ac]ss|css)$/.test(args) ? "local-css" : "css"),
+      type: "css", // Must be static "css" to bundle everything into dist/index.css
     }),
   ],
 });
