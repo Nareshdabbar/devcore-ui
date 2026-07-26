@@ -38,7 +38,7 @@ jobs:
         run: npm run build
 
       - name: Bump Version & Update Changelog
-        run: npx standard-version --release-as patch
+        run: npx standard-version --release-as 0.2.4
 
       - name: Push Version & Tag to GitHub
         run: git push --follow-tags origin main
