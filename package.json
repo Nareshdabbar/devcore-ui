@@ -11,14 +11,16 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./theme/*": "./theme/*",
-    "./dist/*": "./dist/*"
+    "./styles": "./dist/index.css",
+    "./dist/*": "./dist/*",
+    "./theme/*": "./theme/*"
   },
   "files": [
     "dist",
     "theme"
   ],
   "sideEffects": [
+    "./dist/index.css",
     "**/*.css",
     "**/*.scss"
   ],
