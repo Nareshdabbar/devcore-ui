@@ -1,22 +1,61 @@
 # DevCore UI Components
 
-Reusable React UI components with built-in theming support using CSS Variables.
+Reusable React UI components with a lightweight SCSS theme system and CSS Modules-based styles.
 
-## Features
+`@dev-core-ui/components` is designed for app teams that want a small, consistent set of form and text primitives without bringing in a heavy design system.
 
-- **Atomic Design Components** - Fully-featured UI atoms
-- **Light & Dark Theme Support** - Complete theme system with SCSS/CSS variables
-- **CSS Variables (SSR Friendly)** - No JavaScript runtime for theming
-- **Works with Next.js and React** - Framework agnostic
-- **Easy Customization** - Override theme variables at the project level
-- **TypeScript Support** - Full type definitions included
+## Highlights
+
+- 11 exported UI atoms
+- React 18 and React 19 support
+- TypeScript declarations included
+- CSS variable driven theming
+- SCSS theme files available for custom builds
+- Package-ready `styles` export for one-line CSS imports
 
 ## Installation
 
 ```bash
 npm install @dev-core-ui/components
+```
 
-import type { Metadata } from "next";
+Peer dependencies:
+
+- `react`
+- `react-dom`
+
+If your app does not already support Sass, install it too:
+
+```bash
+npm install sass
+```
+
+## Quick Start
+
+Import the library and its styles once at the app root:
+
+```tsx
+import { Button, Input, Text } from "@dev-core-ui/components";
+import "@dev-core-ui/components/styles";
+
+export default function App() {
+  return (
+    <div>
+      <Text variant="h1">Welcome to DevCore UI</Text>
+      <Input name="email" label="Email" type="email" />
+      <Button variant="primary">Submit</Button>
+    </div>
+  );
+}
+```
+
+## Framework Notes
+
+### Next.js
+
+Import the package styles in your root layout:
+
+```tsx
 import "@dev-core-ui/components/styles";
 
 export default function RootLayout({
@@ -30,318 +69,317 @@ export default function RootLayout({
     </html>
   );
 }
+```
 
-import React from "react";
-import ReactDOM from "react-dom/client";
+### Vite, CRA, Remix, and others
+
+Import the styles once near your application entry point:
+
+```tsx
 import "@dev-core-ui/components/styles";
-import App from "./App";
+```
 
-ReactDOM.createRoot(document.getElementById("root")!).render(<App />);
+## Available Components
 
-import { Button, Input, Text } from "@dev-core-ui/components";
+### Button
 
-export default function App() {
-  return (
-    <div>
-      <Text variant="h1">Welcome to DevCore UI</Text>
-      <Input label="Email" name="email" />
-      <Button variant="primary">Submit</Button>
-    </div>
-  );
-}
+Primary button with loading and size variants.
 
-Available Components
-Button
-Primary, secondary, ghost, and danger variants with loading and disabled states.
+Props:
 
-Props
+- `variant`: `primary | secondary | ghost | danger`
+- `size`: `sm | md | lg`
+- `isLoading`: `boolean`
 
-variant: primary | secondary | ghost | danger
+Example:
 
-size: sm | md | lg
-
-isLoading: boolean
-
-disabled: boolean
-
-className: string
-
-style: CSSProperties
-
-<Button variant="primary" className="my-button" style={{ minWidth: 120 }}>
-  Submit
+```tsx
+<Button variant="primary" size="md">
+  Save changes
 </Button>
+```
 
-Input
-Text input with label, error state, helper text, and native input support.
+### Input
 
-Props
+Text input with optional label, helper text, and error state.
 
-name: string (required)
+Props:
 
-label: string
+- `name`: `string` required
+- `label`: `string`
+- `error`: `string`
+- `helperText`: `string`
+- `wrapperClassName`: `string`
 
-error: string
+Example:
 
-helperText: string
-
-className: string — applies to the input element
-
-wrapperClassName: string — applies to the component wrapper
-
-style: CSSProperties
+```tsx
 <Input
-  label="Email"
   name="email"
+  label="Email"
   type="email"
-  placeholder="Enter email"
-  className="my-input"
-  style={{ minHeight: 50 }}
+  placeholder="name@example.com"
+  helperText="We\'ll never share your email."
 />
+```
 
-Select
-Dropdown select component with optional options list or custom children.
+### Select
 
-Props
+Dropdown select with optional `options` or custom children.
 
-label: string
+Props:
 
-error: string
+- `label`: `string`
+- `error`: `string`
+- `options`: `{ value: string; label: string }[]`
+- `wrapperClassName`: `string`
 
-options: { value: string; label: string }[]
+Example:
 
-className: string
+```tsx
+<Select
+  name="plan"
+  label="Plan"
+  options={[
+    { value: "starter", label: "Starter" },
+    { value: "pro", label: "Pro" },
+  ]}
+/>
+```
 
-wrapperClassName: string
+### Checkbox
 
-style: CSSProperties
-<Select label="Choose" name="option" className="my-select">
-  <option value="">Select one</option>
-  <option value="1">Option 1</option>
-</Select>
+Checkbox with optional label and native input props.
 
-Checkbox
-Checkbox with label and native props.
+Props:
 
-Props
+- `label`: `string`
+- `wrapperClassName`: `string`
 
-label: string
+Example:
 
-className: string
+```tsx
+<Checkbox name="terms" label="I agree to the terms" />
+```
 
-wrapperClassName: string
+### Textarea
 
-style: CSSProperties
-<Checkbox label="I agree" name="agree" className="my-checkbox" />
+Multi-line text input with label, helper text, and error state.
 
-Textarea
-Multi-line text input with optional rows.
+Props:
 
-Props
+- `label`: `string`
+- `error`: `string`
+- `helperText`: `string`
+- `wrapperClassName`: `string`
 
-label: string
+Example:
 
-error: string
+```tsx
+<Textarea name="message" label="Message" rows={4} />
+```
 
-helperText: string
+### Label
 
-className: string
+Accessible label with an optional required marker.
 
-wrapperClassName: string
+Props:
 
-style: CSSProperties
+- `required`: `boolean`
 
-<Textarea label="Message" name="message" rows={4} className="my-textarea" />
+Example:
 
-Label
-Label component with optional required indicator.
-
-Props
-
-required: boolean
-
-className: string
-
-style: CSSProperties
-
-<Label htmlFor="email" required className="my-label">
+```tsx
+<Label htmlFor="email" required>
   Email
 </Label>
+```
 
-Text
-Semantic text component with headings, paragraphs, labels, captions, and code.
+### Text
 
-Props
+Semantic text primitive for headings, body text, captions, and code.
 
-variant: h1 | h2 | h3 | h4 | h5 | h6 | p | label | small | caption | code
+Props:
 
-size: xs | sm | md | lg | xl | 2xl | 3xl | 4xl
+- `variant`: `h1 | h2 | h3 | h4 | h5 | h6 | p | label | small | caption | code`
+- `size`: `xs | sm | md | lg | xl | 2xl | 3xl | 4xl`
+- `weight`: `light | normal | medium | semibold | bold`
+- `color`: `primary | text | text-light | error | success | warning`
+- `as`: custom element override
 
-weight: light | normal | medium | semibold | bold
+Example:
 
-color: primary | text | text-light | error | success | warning
-
-className: string
-
-style: CSSProperties
-<Text variant="h1">Heading</Text>
-<Text variant="p" className="my-paragraph">
-  Paragraph text
+```tsx
+<Text variant="h2" color="primary">
+  Section title
 </Text>
+```
 
-FileUpload
-File input component with size validation.
+### FileUpload
 
-Props
+File input with built-in max-size validation.
 
-label: string
+Props:
 
-error: string
+- `label`: `string`
+- `error`: `string`
+- `accept`: `string`
+- `maxSize`: `number` in MB
+- `wrapperClassName`: `string`
 
-accept: string
+Example:
 
-maxSize: number (MB)
+```tsx
+<FileUpload name="resume" label="Upload resume" accept=".pdf,.doc,.docx" />
+```
 
-className: string
+### FormCard
 
-wrapperClassName: string
+Simple container for form sections.
 
-style: CSSProperties
-<FileUpload label="Upload File" name="file" accept=".pdf,.doc" className="my-file-upload" />
+Props:
 
-FormCard
-Container card for form layout sections.
+- standard `div` props
 
-Props
+Example:
 
-className: string
-
-style: CSSProperties
-
-<FormCard className="my-card" style={{ padding: 24 }}>
-  <Input label="Name" name="name" />
-  <Button variant="primary">Submit</Button>
+```tsx
+<FormCard style={{ padding: 24 }}>
+  <Input name="fullName" label="Full name" />
+  <Button type="submit">Submit</Button>
 </FormCard>
+```
 
-Required
-Render a required field marker with customizable color.
+### Required
 
-Props
+Renders a required-field marker.
 
-color: string
+Props:
 
-className: string
+- `color`: `string`
 
-style: CSSProperties
+Example:
 
-<Required color="#d9534f" />
+```tsx
+<Required color="#ef4444" />
+```
 
-Divider
-Horizontal or vertical line with flexible size, color, and className.
+### Divider
 
-Props
+Horizontal or vertical separator.
 
-orientation: horizontal | vertical
+Props:
 
-thickness: string
+- `orientation`: `horizontal | vertical`
+- `color`: `string`
+- `thickness`: `string`
+- `length`: `string`
 
-length: string
+Example:
 
-color: string
-
-className: string
-
-style: CSSProperties
-
+```tsx
 <Divider />
-<Divider orientation="vertical" length="100px" />
-<Divider thickness="2px" color="#d1d5db" className="my-divider" />
+<Divider orientation="vertical" length="24px" />
+```
 
-Theming
-All components use CSS variables from the theme. Override variables in your global stylesheet loaded after @dev-core-ui/components/styles:
+## Theming
 
-CSS
+The package ships with SCSS theme files and CSS variables.
+
+You can override the theme values in your global stylesheet after importing the package styles:
+
+```scss
 :root {
-  --colors-primary: #007bff;
-  --colors-secondary: #6c757d;
+  --colors-background: #ffffff;
+  --colors-surface: #f8fafc;
+  --colors-textPrimary: #111827;
+  --colors-primary: #2563eb;
+  --colors-border: #e5e7eb;
+
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
+
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
 }
-Available Theme Variables
-Colors:
+```
 
---colors-background
+Theme source files are also exposed for apps that want to import the SCSS directly:
 
---colors-surface
+```scss
+@import "@dev-core-ui/components/theme/theme.scss";
+```
 
---colors-overlay
+## Theme Tokens
 
---colors-textPrimary
+Color variables:
 
---colors-textSecondary
+- `--colors-background`
+- `--colors-surface`
+- `--colors-overlay`
+- `--colors-textPrimary`
+- `--colors-textSecondary`
+- `--colors-textDisabled`
+- `--colors-primary`
+- `--colors-primaryHover`
+- `--colors-primaryActive`
+- `--colors-secondary`
+- `--colors-accent`
+- `--colors-success`
+- `--colors-warning`
+- `--colors-error`
+- `--colors-info`
+- `--colors-border`
+- `--colors-shadow`
 
---colors-textDisabled
+Spacing variables:
 
---colors-primary
+- `--spacing-xxs`
+- `--spacing-xs`
+- `--spacing-sm`
+- `--spacing-md`
+- `--spacing-lg`
+- `--spacing-xl`
 
---colors-primaryHover
+Radius variables:
 
---colors-primaryActive
+- `--radius-none`
+- `--radius-sm`
+- `--radius-md`
+- `--radius-lg`
+- `--radius-pill`
 
---colors-secondary
+## Package Exports
 
---colors-accent
+- `@dev-core-ui/components`
+- `@dev-core-ui/components/styles`
+- `@dev-core-ui/components/theme/*`
 
---colors-success
+## Build
 
---colors-warning
+```bash
+npm run build
+```
 
---colors-error
+This builds the package with `tsup` and copies the theme files into `theme/`.
 
---colors-info
+## Release
 
---colors-border
+The project uses `standard-version` for versioning and changelog generation.
 
---colors-shadow
+```bash
+npm run release
+```
 
-Spacing:
+## Browser Support
 
---spacing-xxs
+- Chrome and Edge latest
+- Firefox latest
+- Safari latest
+- Modern mobile browsers
 
---spacing-xs
+## License
 
---spacing-sm
-
---spacing-md
-
---spacing-lg
-
---spacing-xl
-
-Border Radius:
-
---radius-none
-
---radius-sm
-
---radius-md
-
---radius-lg
-
---radius-pill
-
-Browser Support
-Chrome/Edge (latest)
-
-Firefox (latest)
-
-Safari (latest)
-
-Mobile browsers
-
-License
-MIT © DevCore UI
+MIT
