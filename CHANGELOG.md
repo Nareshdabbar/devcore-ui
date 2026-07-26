@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.53](https://github.com/naresha-dev/devcore-ui/compare/v0.2.52...v0.2.53) (2026-07-26)
+
+
+### Bug Fixes
+
+* **styles:** bundle theme variables into main css output ([00f5c0d](https://github.com/naresha-dev/devcore-ui/commit/00f5c0d719caef67c3448fa9e2b3a6efa39f357f))
+
 ### [0.2.52](https://github.com/naresha-dev/devcore-ui/compare/v0.2.51...v0.2.52) (2026-07-26)
 
 
