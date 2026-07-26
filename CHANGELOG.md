@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.55](https://github.com/naresha-dev/devcore-ui/compare/v0.2.54...v0.2.55) (2026-07-26)
+
+
+### Bug Fixes
+
+* **build:** configure static sass plugin to emit dist/index.css ([f04b796](https://github.com/naresha-dev/devcore-ui/commit/f04b79619428c8b1d134efe0c47816b61b419d39))
+
 ### [0.2.54](https://github.com/naresha-dev/devcore-ui/compare/v0.2.53...v0.2.54) (2026-07-26)
 
 
