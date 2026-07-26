@@ -7,11 +7,17 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
-  injectStyle: false, // Prevents inline style injection and emits dist/index.css
+  injectStyle: false, // Emits everything into dist/index.css
   external: ["react", "react-dom"],
   esbuildPlugins: [
     sassPlugin({
-      type: "css", // Must be static "css" to bundle everything into dist/index.css
+      type: "css", // Standard SCSS
+      transform: (source, resolveDir, filePath) => {
+        // If it's a CSS Module file, return it as local-css so hashes get generated
+        return filePath.endsWith(".module.scss") || filePath.endsWith(".module.css")
+          ? "local-css"
+          : "css";
+      },
     }),
   ],
 });
