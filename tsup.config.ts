@@ -10,7 +10,8 @@ export default defineConfig({
   external: ["react", "react-dom"],
   esbuildPlugins: [
     sassPlugin({
-      type: "local-css",
+      // Dynamically assign "local-css" to *.module.scss and "css" to global scss
+      type: (args) => (/\.module\.(s[ac]ss|css)$/.test(args) ? "local-css" : "css"),
     }),
   ],
 });
