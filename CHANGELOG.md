@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.54](https://github.com/naresha-dev/devcore-ui/compare/v0.2.53...v0.2.54) (2026-07-26)
+
+
+### Bug Fixes
+
+* **ci:** add loop guard and rollup binary fix for linux runners ([ecca58b](https://github.com/naresha-dev/devcore-ui/commit/ecca58b801dbb40a3aee2709708fcf051df8dad4))
+* **deps:** add rollup linux binary to optionalDependencies ([759eb93](https://github.com/naresha-dev/devcore-ui/commit/759eb93159827d999ad79ab4aea6f2da6b90c85e))
+* **styles:** bundle theme variables into main css output ([1c52cc1](https://github.com/naresha-dev/devcore-ui/commit/1c52cc19379976b42153cc836c17c509c5bc04e9))
+* **styles:** bundle theme variables into main css output ([13e6412](https://github.com/naresha-dev/devcore-ui/commit/13e6412f1ba8de9eaa0462e98080effc816ecc9c))
+
 ### [0.2.53](https://github.com/naresha-dev/devcore-ui/compare/v0.2.52...v0.2.53) (2026-07-26)
 
 
