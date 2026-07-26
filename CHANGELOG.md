@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.56](https://github.com/naresha-dev/devcore-ui/compare/v0.2.55...v0.2.56) (2026-07-26)
+
+
+### Bug Fixes
+
+* **styles:** support css modules and subpath styles export ([37b9c7d](https://github.com/naresha-dev/devcore-ui/commit/37b9c7d76dc74c06cf4132af60ab0ddf4c75375e))
+
 ### [0.2.55](https://github.com/naresha-dev/devcore-ui/compare/v0.2.54...v0.2.55) (2026-07-26)
 
 
