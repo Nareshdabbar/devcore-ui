@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://github.com/naresha-dev/devcore-ui/compare/v0.2.2...v0.2.4) (2026-07-26)
+
+
+### Bug Fixes
+
+* **ci:** add --include=optional to npm install step ([48f807e](https://github.com/naresha-dev/devcore-ui/commit/48f807ebc3c790ed315120d6818cefd5be1f75e6))
+* **ci:** ensure rollup linux binary is installed ([8a9a77f](https://github.com/naresha-dev/devcore-ui/commit/8a9a77fbd22ec97ea4f75722536c8f04aa97f68c))
+* **ci:** force patch release bump ([98ee3c4](https://github.com/naresha-dev/devcore-ui/commit/98ee3c46e2ca5329c3b8d625e1e6754f0198a6dd))
+* **ci:** target version 0.2.4 to bypass tag conflict ([5bafa95](https://github.com/naresha-dev/devcore-ui/commit/5bafa950691a88ebd0e2181e736d67b505938603))
+
 ### [0.2.2](https://github.com/naresha-dev/devcore-ui/compare/v0.1.17...v0.2.2) (2026-07-25)
 
 
