@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./Input.module.scss";
-import clsx from "clsx"; // 1. Import clsx
+import clsx from "clsx";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -13,22 +13,47 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ label, name, error, helperText, className, wrapperClassName, ...props }, ref) => {
+  (
+    {
+      label,
+      name,
+      error,
+      helperText,
+      className,
+      wrapperClassName,
+      required,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <div className={`${styles.wrapper} ${wrapperClassName ?? ""}`.trim()}>
         {label && (
           <label className={styles.label} htmlFor={name}>
             {label}
+            {required && (
+              <span className={styles.required} aria-hidden="true">
+                *
+              </span>
+            )}
           </label>
         )}
+
         <input
           ref={ref}
           id={name}
           name={name}
-          className={clsx(styles.input, error && styles.invalid, className)}
+          required={required}
+          className={clsx(
+            styles.input,
+            error && styles.invalid,
+            className,
+          )}
           {...props}
         />
+
         {error && <div className={styles.error}>{error}</div>}
+
         {helperText && !error && (
           <div className={styles.helperText}>{helperText}</div>
         )}
