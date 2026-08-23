@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.62](https://github.com/naresha-dev/devcore-ui/compare/v0.2.61...v0.2.62) (2026-08-23)
+
 ### [0.2.61](https://github.com/naresha-dev/devcore-ui/compare/v0.2.60...v0.2.61) (2026-08-20)
 
 ### [0.2.60](https://github.com/naresha-dev/devcore-ui/compare/v0.2.59...v0.2.60) (2026-07-26)
