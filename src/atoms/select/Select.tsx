@@ -10,18 +10,14 @@ interface SelectOption {
   disabled?: boolean;
 }
 
-interface SelectProps
-  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   error?: string;
   options?: SelectOption[];
   wrapperClassName?: string;
 }
 
-const Select = React.forwardRef<
-  HTMLSelectElement,
-  SelectProps
->(
+const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
       label,
@@ -33,6 +29,7 @@ const Select = React.forwardRef<
       required,
       name,
       id,
+      onChange,
       ...props
     },
     ref,
@@ -40,23 +37,13 @@ const Select = React.forwardRef<
     const selectId = id ?? name;
 
     return (
-      <div
-        className={`${styles.wrapper} ${
-          wrapperClassName ?? ""
-        }`.trim()}
-      >
+      <div className={`${styles.wrapper} ${wrapperClassName ?? ""}`.trim()}>
         {label && (
-          <label
-            className={styles.label}
-            htmlFor={selectId}
-          >
+          <label className={styles.label} htmlFor={selectId}>
             {label}
 
             {required && (
-              <span
-                className={styles.required}
-                aria-hidden="true"
-              >
+              <span className={styles.required} aria-hidden="true">
                 *
               </span>
             )}
@@ -72,11 +59,15 @@ const Select = React.forwardRef<
             error ? styles.invalid : ""
           } ${className ?? ""}`.trim()}
           {...props}
+          onChange={(event) => {
+            onChange?.(event);
+            event.currentTarget.blur();
+          }}
         >
           {options
-            ? options.map((option) => (
+            ? options.map((option, index) => (
                 <option
-                  key={option.value}
+                  key={`${option.value}-${index}`}
                   value={option.value}
                   disabled={option.disabled}
                 >
@@ -86,11 +77,7 @@ const Select = React.forwardRef<
             : children}
         </select>
 
-        {error && (
-          <div className={styles.error}>
-            {error}
-          </div>
-        )}
+        {error && <div className={styles.error}>{error}</div>}
       </div>
     );
   },
