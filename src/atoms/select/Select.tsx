@@ -13,6 +13,7 @@ interface SelectOption {
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   error?: string;
+  helperText?: string;
   options?: SelectOption[];
   wrapperClassName?: string;
 }
@@ -22,6 +23,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     {
       label,
       error,
+      helperText,
       options,
       children,
       className,
@@ -35,6 +37,15 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     ref,
   ) => {
     const selectId = id ?? name;
+    const errorId = `${selectId}-error`;
+    const helperId = `${selectId}-helper`;
+
+    const ariaDescribedBy = [
+      error && errorId,
+      helperText && !error && helperId,
+    ]
+      .filter(Boolean)
+      .join(" ");
 
     return (
       <div className={`${styles.wrapper} ${wrapperClassName ?? ""}`.trim()}>
@@ -55,6 +66,8 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           id={selectId}
           name={name}
           required={required}
+          aria-invalid={!!error}
+          aria-describedby={ariaDescribedBy || undefined}
           className={`${styles.select} ${
             error ? styles.invalid : ""
           } ${className ?? ""}`.trim()}
@@ -77,7 +90,11 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             : children}
         </select>
 
-        {error && <div className={styles.error}>{error}</div>}
+        {error && <div className={styles.error} id={errorId}>{error}</div>}
+
+        {helperText && !error && (
+          <div className={styles.helperText} id={helperId}>{helperText}</div>
+        )}
       </div>
     );
   },

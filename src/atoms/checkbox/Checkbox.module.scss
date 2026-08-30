@@ -28,3 +28,20 @@
     color: var(--colors-primary);
   }
 }
+
+.required {
+  margin-left: 0.2rem;
+  color: var(--colors-error);
+}
+
+.error {
+  color: var(--colors-error);
+  font-size: var(--typography-caption-fontSize);
+  margin-top: var(--spacing-xs);
+}
+
+.helperText {
+  color: var(--colors-textSecondary);
+  font-size: var(--typography-caption-fontSize);
+  margin-top: var(--spacing-xs);
+}

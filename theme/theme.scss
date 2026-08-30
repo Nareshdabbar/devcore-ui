@@ -27,26 +27,37 @@
   --colors-border: #{$color-border};
   --colors-shadow: #{$color-shadow};
 
-  /* typography */
+  /* typography - semantic variants for Text component */
   --typography-fontFamily: #{$font-family};
-  --typography-h1-fontSize: 32px;
-  --typography-h1-fontWeight: 700;
-  --typography-h1-lineHeight: 40px;
-  --typography-h2-fontSize: 24px;
-  --typography-h2-fontWeight: 600;
-  --typography-h2-lineHeight: 32px;
-  --typography-h3-fontSize: 20px;
-  --typography-h3-fontWeight: 600;
-  --typography-h3-lineHeight: 28px;
+  
+  --typography-title-fontSize: 32px;
+  --typography-title-fontWeight: 700;
+  --typography-title-lineHeight: 40px;
+  
+  --typography-sectionTitle-fontSize: 24px;
+  --typography-sectionTitle-fontWeight: 600;
+  --typography-sectionTitle-lineHeight: 32px;
+  
+  --typography-subsection-fontSize: 20px;
+  --typography-subsection-fontWeight: 600;
+  --typography-subsection-lineHeight: 28px;
+  
   --typography-body-fontSize: 16px;
   --typography-body-fontWeight: 400;
   --typography-body-lineHeight: 24px;
-  --typography-button-fontSize: 14px;
-  --typography-button-fontWeight: 500;
-  --typography-button-lineHeight: 20px;
+  
+  --typography-bodySmall-fontSize: 14px;
+  --typography-bodySmall-fontWeight: 400;
+  --typography-bodySmall-lineHeight: 20px;
+  
   --typography-caption-fontSize: 12px;
   --typography-caption-fontWeight: 400;
   --typography-caption-lineHeight: 16px;
+
+  /* component typography */
+  --typography-button-fontSize: 14px;
+  --typography-button-fontWeight: 500;
+  --typography-button-lineHeight: 20px;
 
   /* spacing */
   --spacing-xxs: #{$spacing-xxs};
@@ -83,11 +94,6 @@
   --motion-normal: #{$motion-normal};
   --motion-slow: #{$motion-slow};
   --motion-easing: #{$motion-easing};
-
-  /* breakpoints */
-  --breakpoints-mobile: 480px;
-  --breakpoints-tablet: 768px;
-  --breakpoints-desktop: 1024px;
 
   /* components */
   --components-button-height: 40px;

@@ -6,13 +6,38 @@ import styles from "./FileUpload.module.scss";
 interface FileUploadProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
+  helperText?: string;
   accept?: string;
   maxSize?: number; // in MB
   wrapperClassName?: string;
 }
 
 const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
-  ({ label, error, accept = "image/*,.pdf", maxSize = 5, className, wrapperClassName, onChange, ...props }, ref) => {
+  ({
+    label,
+    name,
+    id,
+    error,
+    helperText,
+    accept = "image/*,.pdf",
+    maxSize = 5,
+    className,
+    wrapperClassName,
+    required,
+    onChange,
+    ...props
+  }, ref) => {
+    const fileId = id ?? name;
+    const errorId = `${fileId}-error`;
+    const helperId = `${fileId}-helper`;
+
+    const ariaDescribedBy = [
+      error && errorId,
+      helperText && !error && helperId,
+    ]
+      .filter(Boolean)
+      .join(" ");
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file && maxSize) {
@@ -28,16 +53,33 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
 
     return (
       <div className={`${styles.wrapper} ${wrapperClassName ?? ""}`.trim()}>
-        {label && <label className={styles.label}>{label}</label>}
+        {label && (
+          <label className={styles.label} htmlFor={fileId}>
+            {label}
+            {required && (
+              <span className={styles.required} aria-hidden="true">
+                *
+              </span>
+            )}
+          </label>
+        )}
         <input
           ref={ref}
           type="file"
+          id={fileId}
+          name={name}
           accept={accept}
+          required={required}
+          aria-invalid={!!error}
+          aria-describedby={ariaDescribedBy || undefined}
           className={`${styles.input} ${error ? styles.invalid : ""} ${className ?? ""}`.trim()}
           {...props}
           onChange={handleChange}
         />
-        {error && <div className={styles.error}>{error}</div>}
+        {error && <div className={styles.error} id={errorId}>{error}</div>}
+        {helperText && !error && (
+          <div className={styles.helperText} id={helperId}>{helperText}</div>
+        )}
       </div>
     );
   }

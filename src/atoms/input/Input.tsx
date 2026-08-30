@@ -17,6 +17,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     {
       label,
       name,
+      id,
       error,
       helperText,
       className,
@@ -26,10 +27,21 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
+    const inputId = id ?? name;
+    const errorId = `${inputId}-error`;
+    const helperId = `${inputId}-helper`;
+
+    const ariaDescribedBy = [
+      error && errorId,
+      helperText && !error && helperId,
+    ]
+      .filter(Boolean)
+      .join(" ");
+
     return (
       <div className={`${styles.wrapper} ${wrapperClassName ?? ""}`.trim()}>
         {label && (
-          <label className={styles.label} htmlFor={name}>
+          <label className={styles.label} htmlFor={inputId}>
             {label}
             {required && (
               <span className={styles.required} aria-hidden="true">
@@ -41,9 +53,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
         <input
           ref={ref}
-          id={name}
+          id={inputId}
           name={name}
           required={required}
+          aria-invalid={!!error}
+          aria-describedby={ariaDescribedBy || undefined}
           className={clsx(
             styles.input,
             error && styles.invalid,
@@ -52,10 +66,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
 
-        {error && <div className={styles.error}>{error}</div>}
+        {error && <div className={styles.error} id={errorId}>{error}</div>}
 
         {helperText && !error && (
-          <div className={styles.helperText}>{helperText}</div>
+          <div className={styles.helperText} id={helperId}>{helperText}</div>
         )}
       </div>
     );

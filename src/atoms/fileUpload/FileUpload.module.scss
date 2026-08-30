@@ -52,3 +52,21 @@
   font-size: var(--typography-caption-fontSize);
   margin-top: var(--spacing-xs);
 }
+
+.helperText {
+  color: var(--colors-textSecondary);
+  font-size: var(--typography-caption-fontSize);
+  margin-top: var(--spacing-xs);
+}
+
+.required {
+  margin-left: 0.2rem;
+  color: var(--colors-error);
+}
+
+.label {
+  font-size: var(--typography-button-fontSize);
+  font-weight: var(--typography-button-fontWeight);
+  color: var(--colors-textPrimary);
+  display: block;
+}

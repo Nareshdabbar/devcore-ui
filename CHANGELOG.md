@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/naresha-dev/devcore-ui/releases/tag/v1.0.0) (2026-08-30)
+
+### Features
+
+* **text:** semantic typography variants (title, sectionTitle, subsection, body, bodySmall, small, caption) for project-friendly usage
+* **button:** expanded button variants from 4 to 8 (added success, warning, info, soft)
+* **accessibility:** improved form components with WCAG 2.1 AA compliance
+  - Added `aria-invalid` attribute for error states
+  - Added `aria-describedby` for error/helper text associations
+  - Proper `id`/`htmlFor` connections in all form fields
+  - Support for `helperText` prop across all form components
+* **form:** all form components now support custom `id` prop for flexible integration
+* **theme:** cleaned up typography variables - removed duplication, kept only semantic variants
+
+### Changes
+
+* **text:** simplified Text component API - semantic variants cover 95% of use cases
+* **theme:** removed unnecessary HTML-based typography variables (--typography-h1/h2/h3)
+* **theme:** removed breakpoint variables - projects handle responsive design via clamp() or media queries
+
+### Breaking Changes
+
+* **text:** `size` and `weight` props removed (semantic variants already include these)
+* **theme:** HTML-based typography variables replaced by semantic variants
+
+### Bug Fixes
+
+* Fixed duplicate typography variable definitions
+* Removed redundant CSS classes
+* Removed unused theme variables (breakpoints)
+
+### Migration Guide
+
+**Before (Old API):**
+```tsx
+<Text variant="h2" size="2xl" weight="bold">Title</Text>
+```
+
+**After (New API):**
+```tsx
+<Text variant="sectionTitle">Title</Text>
+```
+
+Projects control fonts globally via theme:
+```scss
+:root {
+  --typography-title-fontSize: clamp(28px, 5vw, 36px);
+  --typography-body-fontSize: clamp(14px, 2.5vw, 18px);
+}
+```
+
 ### [0.2.62](https://github.com/naresha-dev/devcore-ui/compare/v0.2.61...v0.2.62) (2026-08-23)
 
 ### [0.2.61](https://github.com/naresha-dev/devcore-ui/compare/v0.2.60...v0.2.61) (2026-08-20)
