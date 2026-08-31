@@ -1,6 +1,6 @@
 {
   "name": "@dev-core-ui/components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "DevCore reusable UI components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
