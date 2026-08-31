@@ -52,7 +52,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/naresha-dev/devcore-ui.git"
+    "url": "git+https://github.com/Nareshdabbar/devcore-ui.git"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.62.3"
