@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/Nareshdabbar/devcore-ui/compare/v1.0.2...v1.0.3) (2026-08-31)
+
+
+### Bug Fixes
+
+* correct theme variables filename ([94776ef](https://github.com/Nareshdabbar/devcore-ui/commit/94776ef72a909f84f42bcabaee4f2aff607f6429))
+
 ### [1.0.2](https://github.com/Nareshdabbar/devcore-ui/compare/v1.0.1...v1.0.2) (2026-08-31)
 
 
