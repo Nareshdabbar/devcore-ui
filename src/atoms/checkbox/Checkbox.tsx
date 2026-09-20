@@ -1,54 +1,67 @@
 "use client";
 
 import React from "react";
+import clsx from "clsx";
 import styles from "./Checkbox.module.scss";
 
-interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
+export type CheckboxDirection = "row" | "column";
+export type CheckboxGap = "xs" | "sm" | "md";
+
+export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: React.ReactNode;
   error?: string;
   helperText?: string;
   wrapperClassName?: string;
+  direction?: CheckboxDirection;
+  gap?: CheckboxGap;
 }
 
-const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
-  ({
-    label,
-    name,
-    id,
-    error,
-    helperText,
-    className,
-    wrapperClassName,
-    required,
-    ...props
-  }, ref) => {
-    const checkboxId = id ?? name ?? `checkbox-${Math.random().toString(36).substr(2, 9)}`;
-    const errorId = `${checkboxId}-error`;
-    const helperId = `${checkboxId}-helper`;
+const Checkbox = ({
+  label,
+  id,
+  error,
+  helperText,
+  className,
+  wrapperClassName,
+  required,
+  direction = "row",
+  gap = "sm",
+  ...props
+}: CheckboxProps) => {
+  const generatedId = React.useId();
+  const checkboxId = id ?? `checkbox-${generatedId}`;
 
-    const ariaDescribedBy = [
-      error && errorId,
-      helperText && !error && helperId,
-    ]
-      .filter(Boolean)
-      .join(" ");
+  const errorId = `${checkboxId}-error`;
+  const helperId = `${checkboxId}-helper`;
 
-    return (
-      <div className={`${styles.wrapper} ${wrapperClassName ?? ""}`.trim()}>
+  const ariaDescribedBy = [error && errorId, helperText && !error && helperId]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <div className={clsx(styles.wrapper, wrapperClassName)}>
+      <div
+        className={clsx(
+          styles.control,
+          direction === "column" && styles.column,
+          gap === "xs" && styles.gapXs,
+          gap === "md" && styles.gapMd,
+        )}
+      >
         <input
-          ref={ref}
           type="checkbox"
           id={checkboxId}
-          name={name}
           required={required}
-          aria-invalid={!!error}
+          aria-invalid={error ? "true" : undefined}
           aria-describedby={ariaDescribedBy || undefined}
-          className={`${styles.checkbox} ${className ?? ""}`.trim()}
+          className={clsx(styles.checkbox, className)}
           {...props}
         />
+
         {label && (
           <label htmlFor={checkboxId} className={styles.label}>
             {label}
+
             {required && (
               <span className={styles.required} aria-hidden="true">
                 *
@@ -56,15 +69,21 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             )}
           </label>
         )}
-        {error && <div className={styles.error} id={errorId}>{error}</div>}
-        {helperText && !error && (
-          <div className={styles.helperText} id={helperId}>{helperText}</div>
-        )}
       </div>
-    );
-  }
-);
 
-Checkbox.displayName = "Checkbox";
+      {error && (
+        <div className={styles.error} id={errorId} role="alert">
+          {error}
+        </div>
+      )}
+
+      {helperText && !error && (
+        <div className={styles.helperText} id={helperId}>
+          {helperText}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Checkbox;

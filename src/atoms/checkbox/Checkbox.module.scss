@@ -1,19 +1,45 @@
 .wrapper {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+}
+
+.control {
+  display: flex;
   align-items: center;
   gap: var(--spacing-sm);
 }
 
+.column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gapXs {
+  gap: var(--spacing-xs);
+}
+
+.gapMd {
+  gap: var(--spacing-md);
+}
+
 .checkbox {
+  box-sizing: border-box;
   width: 18px;
   height: 18px;
   cursor: pointer;
   accent-color: var(--colors-primary);
-  transition: all var(--motion-fast) var(--motion-easing);
+  transition: opacity var(--motion-fast) var(--motion-easing);
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--colors-focus);
+    outline-offset: var(--spacing-xxs);
+  }
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: var(--opacity-disabled);
   }
 }
 
@@ -30,18 +56,16 @@
 }
 
 .required {
-  margin-left: 0.2rem;
+  margin-left: var(--spacing-xxs);
   color: var(--colors-error);
 }
 
 .error {
   color: var(--colors-error);
   font-size: var(--typography-caption-fontSize);
-  margin-top: var(--spacing-xs);
 }
 
 .helperText {
   color: var(--colors-textSecondary);
   font-size: var(--typography-caption-fontSize);
-  margin-top: var(--spacing-xs);
 }

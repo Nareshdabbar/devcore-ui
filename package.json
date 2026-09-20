@@ -1,6 +1,6 @@
 {
   "name": "@dev-core-ui/components",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "DevCore reusable UI components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -12,20 +12,15 @@
       "require": "./dist/index.js"
     },
     "./styles": "./dist/index.css",
-    "./dist/*": "./dist/*",
-    "./theme/*": "./theme/*"
+    "./dist/*": "./dist/*"
   },
-  "files": [
-    "dist",
-    "theme"
-  ],
   "sideEffects": [
     "./dist/index.css",
     "**/*.css",
     "**/*.scss"
   ],
   "scripts": {
-    "build": "tsup && cpy \"src/theme/**/*\" theme",
+    "build": "tsup",
     "dev": "tsup --watch",
     "release": "standard-version"
   },
@@ -39,7 +34,6 @@
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "cpy-cli": "^6.0.0",
     "esbuild-sass-plugin": "^3.3.1",
     "sass": "^1.80.0",
     "standard-version": "^9.5.0",

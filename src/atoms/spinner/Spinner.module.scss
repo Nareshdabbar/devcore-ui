@@ -1,0 +1,44 @@
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.circle {
+  display: block;
+  width: var(--spacing-lg);
+  height: var(--spacing-lg);
+  border: var(--border-width) solid var(--colors-border);
+  border-top-color: var(--colors-primary);
+  border-radius: var(--radius-pill);
+  animation: spinner-rotate var(--motion-slow) linear infinite;
+}
+
+.sm .circle {
+  width: var(--spacing-md);
+  height: var(--spacing-md);
+}
+
+.md .circle {
+  width: var(--spacing-lg);
+  height: var(--spacing-lg);
+}
+
+.lg .circle {
+  width: var(--spacing-xl);
+  height: var(--spacing-xl);
+}
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circle {
+    animation-duration: var(--motion-slow);
+    animation-iteration-count: 1;
+  }
+}

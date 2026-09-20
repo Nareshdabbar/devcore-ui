@@ -1,24 +1,22 @@
 "use client";
 
 import React from "react";
+import clsx from "clsx";
 import styles from "./Label.module.scss";
 
-interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
-  children: React.ReactNode;
-  required?: boolean;
-}
+export type LabelProps =
+React.LabelHTMLAttributes<HTMLLabelElement>;
 
-const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
-  ({ children, required, className, ...props }, ref) => {
-    return (
-      <label ref={ref} className={`${styles.label} ${className ?? ""}`.trim()} {...props}>
-        {children}
-        {required && <span className={styles.required}>*</span>}
-      </label>
-    );
-  }
+const Label = ({
+className,
+...props
+}: LabelProps) => {
+return (
+<label
+className={clsx(styles.label, className)}
+{...props}
+/>
 );
-
-Label.displayName = "Label";
+};
 
 export default Label;

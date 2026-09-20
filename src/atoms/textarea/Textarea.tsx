@@ -1,71 +1,103 @@
 "use client";
 
 import React from "react";
+import clsx from "clsx";
 import styles from "./Textarea.module.scss";
 
-interface TextareaProps
+export type TextareaGap = "xs" | "sm" | "md" | "lg";
+
+export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
-  name?: string;
+  label?: React.ReactNode;
   error?: string;
   helperText?: string;
   wrapperClassName?: string;
+  gap?: TextareaGap;
 }
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({
-    label,
-    name,
-    id,
-    error,
-    helperText,
-    className,
-    wrapperClassName,
-    required,
-    ...props
-  }, ref) => {
-    const textareaId = id ?? name;
-    const errorId = `${textareaId}-error`;
-    const helperId = `${textareaId}-helper`;
+const Textarea = ({
+  label,
+  id,
+  error,
+  helperText,
+  className,
+  wrapperClassName,
+  required,
+  gap = "xs",
+  ...props
+}: TextareaProps) => {
+  const generatedId = React.useId();
+  const textareaId = id ?? `textarea-${generatedId}`;
 
-    const ariaDescribedBy = [
-      error && errorId,
-      helperText && !error && helperId,
-    ]
-      .filter(Boolean)
-      .join(" ");
+  const errorId = `${textareaId}-error`;
+  const helperId = `${textareaId}-helper`;
 
-    return (
-      <div className={`${styles.wrapper} ${wrapperClassName ?? ""}`.trim()}>
-        {label && (
-          <label className={styles.label} htmlFor={textareaId}>
-            {label}
-            {required && (
-              <span className={styles.required} aria-hidden="true">
-                *
-              </span>
-            )}
-          </label>
+  const ariaDescribedBy = [
+    error && errorId,
+    helperText && !error && helperId,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <div
+      className={clsx(
+        styles.wrapper,
+        styles[`gap-${gap}`],
+        wrapperClassName,
+      )}
+    >
+      {label && (
+        <label
+          className={styles.label}
+          htmlFor={textareaId}
+        >
+          {label}
+
+          {required && (
+            <span
+              className={styles.required}
+              aria-hidden="true"
+            >
+              *
+            </span>
+          )}
+        </label>
+      )}
+
+      <textarea
+        id={textareaId}
+        required={required}
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby={ariaDescribedBy || undefined}
+        className={clsx(
+          styles.textarea,
+          error && styles.invalid,
+          className,
         )}
-        <textarea
-          ref={ref}
-          id={textareaId}
-          name={name}
-          required={required}
-          aria-invalid={!!error}
-          aria-describedby={ariaDescribedBy || undefined}
-          className={`${styles.textarea} ${error ? styles.invalid : ""} ${className ?? ""}`.trim()}
-          {...props}
-        />
-        {error && <div className={styles.error} id={errorId}>{error}</div>}
-        {helperText && !error && (
-          <div className={styles.helperText} id={helperId}>{helperText}</div>
-        )}
-      </div>
-    );
-  }
-);
+        {...props}
+      />
 
-Textarea.displayName = "Textarea";
+      {error && (
+        <div
+          className={styles.error}
+          id={errorId}
+          role="alert"
+        >
+          {error}
+        </div>
+      )}
+
+      {helperText && !error && (
+        <div
+          className={styles.helperText}
+          id={helperId}
+        >
+          {helperText}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Textarea;

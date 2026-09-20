@@ -1,18 +1,19 @@
 "use client";
 
-import React, { JSX } from "react";
+import React from "react";
+import clsx from "clsx";
 import styles from "./Text.module.scss";
 
-type SemanticVariant = 
-  | "title"           // Page title - h1, 32px, bold
-  | "sectionTitle"    // Section header - h2, 24px, semibold
-  | "subsection"      // Subsection - h3, 20px, semibold
-  | "body"            // Main text - p, 16px, normal
-  | "bodySmall"       // Secondary text - p, 14px, normal
-  | "small"           // Tertiary text - span, 12px, normal
-  | "caption";        // Helper text - span, 12px, light
+export type SemanticVariant =
+  | "title"
+  | "sectionTitle"
+  | "subsection"
+  | "body"
+  | "bodySmall"
+  | "small"
+  | "caption";
 
-type TextColor =
+export type TextColor =
   | "primary"
   | "text"
   | "text-light"
@@ -21,56 +22,52 @@ type TextColor =
   | "warning"
   | "info";
 
-interface TextProps {
+export type TextElement = React.ElementType;
+
+export interface TextProps
+  extends React.HTMLAttributes<HTMLElement> {
   variant?: SemanticVariant;
   color?: TextColor;
-  className?: string;
   children: React.ReactNode;
-  as?: React.ElementType;
+  as?: TextElement;
 }
 
-const Text = React.forwardRef<HTMLElement, TextProps>(
-  (
+const elementMap: Record<
+  SemanticVariant,
+  keyof React.JSX.IntrinsicElements
+> = {
+  title: "h1",
+  sectionTitle: "h2",
+  subsection: "h3",
+  body: "p",
+  bodySmall: "p",
+  small: "span",
+  caption: "span",
+};
+
+const Text = ({
+  variant = "body",
+  color,
+  className,
+  children,
+  as,
+  ...props
+}: TextProps) => {
+  const Component = as ?? elementMap[variant];
+
+  return React.createElement(
+    Component,
     {
-      variant = "body",
-      color,
-      className = "",
-      children,
-      as,
-      ...props
+      className: clsx(
+        styles.text,
+        styles[variant],
+        color && styles[`color-${color}`],
+        className,
+      ),
+      ...props,
     },
-    ref
-  ) => {
-    // Map semantic variants to HTML elements
-    const elementMap: Record<SemanticVariant, keyof JSX.IntrinsicElements> = {
-      title: "h1",
-      sectionTitle: "h2",
-      subsection: "h3",
-      body: "p",
-      bodySmall: "p",
-      small: "span",
-      caption: "span",
-    };
-
-    const Component = as || elementMap[variant];
-
-    const classNames = [
-      styles.text,
-      styles[variant],
-      color && styles[`color-${color}`],
-      className,
-    ]
-      .filter(Boolean)
-      .join(" ");
-
-    return React.createElement(
-      Component,
-      { ref, className: classNames, ...props },
-      children
-    );
-  }
-);
-
-Text.displayName = "Text";
+    children,
+  );
+};
 
 export default Text;

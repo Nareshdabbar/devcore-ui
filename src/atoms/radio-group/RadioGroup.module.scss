@@ -1,0 +1,31 @@
+.group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  --radio-group-gap: var(--spacing-md);
+}
+
+.legend {
+  margin: 0 0 var(--spacing-sm);
+  padding: 0;
+  color: var(--colors-textPrimary);
+  font-size: var(--typography-bodySmall-fontSize);
+  font-weight: var(--typography-fontWeight-medium);
+  line-height: var(--typography-bodySmall-lineHeight);
+}
+
+.options {
+  display: flex;
+  gap: var(--radio-group-gap);
+}
+
+.vertical .options {
+  flex-direction: column;
+}
+
+.horizontal .options {
+  flex-direction: row;
+  flex-wrap: wrap;
+}

@@ -1,7 +1,7 @@
 .required {
   color: var(--colors-error);
   margin-left: var(--spacing-xs);
-  font-weight: 700;
+  font-weight: var(--typography-fontWeight-bold);
   line-height: 1;
   display: inline-block;
 }

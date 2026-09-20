@@ -1,90 +1,133 @@
 "use client";
 
 import React from "react";
+import clsx from "clsx";
 import styles from "./FileUpload.module.scss";
 
-interface FileUploadProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
+export interface FileUploadProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "size" | "onChange"
+  > {
+  label?: React.ReactNode;
   error?: string;
   helperText?: string;
-  accept?: string;
-  maxSize?: number; // in MB
+  maxSize?: number;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onValidationError?: (message: string) => void;
   wrapperClassName?: string;
 }
 
-const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
-  ({
-    label,
-    name,
-    id,
-    error,
-    helperText,
-    accept = "image/*,.pdf",
-    maxSize = 5,
-    className,
-    wrapperClassName,
-    required,
-    onChange,
-    ...props
-  }, ref) => {
-    const fileId = id ?? name;
-    const errorId = `${fileId}-error`;
-    const helperId = `${fileId}-helper`;
+const FileUpload = ({
+  label,
+  id,
+  error,
+  helperText,
+  maxSize,
+  className,
+  wrapperClassName,
+  required,
+  onChange,
+  onValidationError,
+  ...props
+}: FileUploadProps) => {
+  const generatedId = React.useId();
+  const fileId = id ?? `file-upload-${generatedId}`;
 
-    const ariaDescribedBy = [
-      error && errorId,
-      helperText && !error && helperId,
-    ]
-      .filter(Boolean)
-      .join(" ");
+  const errorId = `${fileId}-error`;
+  const helperId = `${fileId}-helper`;
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file && maxSize) {
-        const maxBytes = maxSize * 1024 * 1024;
-        if (file.size > maxBytes) {
-          alert(`File size must be less than ${maxSize}MB`);
-          e.target.value = "";
-          return;
-        }
+  const ariaDescribedBy = [
+    error && errorId,
+    helperText && !error && helperId,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const validateFiles = (
+    files: FileList | null,
+  ): string | undefined => {
+    if (!files || maxSize === undefined) {
+      return undefined;
+    }
+
+    const maxBytes = maxSize * 1024 * 1024;
+
+    for (const file of Array.from(files)) {
+      if (file.size > maxBytes) {
+        return `${file.name} exceeds the maximum file size of ${maxSize} MB.`;
       }
-      onChange?.(e);
-    };
+    }
 
-    return (
-      <div className={`${styles.wrapper} ${wrapperClassName ?? ""}`.trim()}>
-        {label && (
-          <label className={styles.label} htmlFor={fileId}>
-            {label}
-            {required && (
-              <span className={styles.required} aria-hidden="true">
-                *
-              </span>
-            )}
-          </label>
-        )}
-        <input
-          ref={ref}
-          type="file"
-          id={fileId}
-          name={name}
-          accept={accept}
-          required={required}
-          aria-invalid={!!error}
-          aria-describedby={ariaDescribedBy || undefined}
-          className={`${styles.input} ${error ? styles.invalid : ""} ${className ?? ""}`.trim()}
-          {...props}
-          onChange={handleChange}
-        />
-        {error && <div className={styles.error} id={errorId}>{error}</div>}
-        {helperText && !error && (
-          <div className={styles.helperText} id={helperId}>{helperText}</div>
-        )}
-      </div>
-    );
-  }
-);
+    return undefined;
+  };
 
-FileUpload.displayName = "FileUpload";
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    const validationError = validateFiles(event.target.files);
+
+    if (validationError) {
+      event.target.value = "";
+      onValidationError?.(validationError);
+      return;
+    }
+
+    onChange?.(event);
+  };
+
+  return (
+    <div className={clsx(styles.wrapper, wrapperClassName)}>
+      {label && (
+        <label className={styles.label} htmlFor={fileId}>
+          {label}
+
+          {required && (
+            <span
+              className={styles.required}
+              aria-hidden="true"
+            >
+              *
+            </span>
+          )}
+        </label>
+      )}
+
+      <input
+        type="file"
+        id={fileId}
+        required={required}
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby={ariaDescribedBy || undefined}
+        className={clsx(
+          styles.input,
+          error && styles.invalid,
+          className,
+        )}
+        {...props}
+        onChange={handleChange}
+      />
+
+      {error && (
+        <div
+          className={styles.error}
+          id={errorId}
+          role="alert"
+        >
+          {error}
+        </div>
+      )}
+
+      {helperText && !error && (
+        <div
+          className={styles.helperText}
+          id={helperId}
+        >
+          {helperText}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default FileUpload;

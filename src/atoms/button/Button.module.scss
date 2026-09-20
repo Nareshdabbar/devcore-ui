@@ -1,21 +1,34 @@
 .btn {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: none;
-  border-radius: var(--radius-md);
-  font-weight: var(--typography-button-fontWeight);
-  font-size: var(--typography-button-fontSize);
-  line-height: var(--typography-button-lineHeight);
-  height: var(--components-button-height);
-  cursor: pointer;
-  transition: all var(--motion-fast) var(--motion-easing);
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  font-family: var(--typography-fontFamily);
+  width: auto;
+  min-width: 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: var(--border-width) var(--border-style) transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--colors-textPrimary);
+  font-size: var(--typography-button-fontSize);
+  font-weight: var(--typography-button-fontWeight);
+  line-height: var(--typography-button-lineHeight);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) var(--motion-easing),
+    border-color var(--motion-fast) var(--motion-easing),
+    color var(--motion-fast) var(--motion-easing),
+    box-shadow var(--motion-fast) var(--motion-easing),
+    transform var(--motion-fast) var(--motion-easing);
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--colors-focus);
+  }
 
   &:disabled {
-    opacity: 0.6;
+    opacity: var(--opacity-disabled);
     cursor: not-allowed;
   }
 
@@ -26,7 +39,7 @@
 
 .primary {
   background: var(--colors-primary);
-  color: white;
+  color: var(--colors-textOnPrimary);
 
   &:hover:not(:disabled) {
     background: var(--colors-primaryHover);
@@ -40,17 +53,21 @@
 .secondary {
   background: var(--colors-secondary);
   color: var(--colors-textPrimary);
-  border: 1px solid var(--colors-border);
+  border-color: var(--colors-border);
 
   &:hover:not(:disabled) {
-    background: var(--colors-border);
+    background: var(--colors-secondaryHover);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--colors-secondaryActive);
   }
 }
 
 .ghost {
   background: transparent;
   color: var(--colors-primary);
-  border: 1px solid var(--colors-border);
+  border-color: var(--colors-border);
 
   &:hover:not(:disabled) {
     background: var(--colors-surface);
@@ -59,79 +76,52 @@
 
 .danger {
   background: var(--colors-error);
-  color: white;
-
-  &:hover:not(:disabled) {
-    background: #dc2626;
-  }
+  color: var(--colors-textOnPrimary);
 }
 
 .success {
   background: var(--colors-success);
-  color: white;
-
-  &:hover:not(:disabled) {
-    background: #16a34a;
-  }
-
-  &:active:not(:disabled) {
-    background: #15803d;
-  }
+  color: var(--colors-textOnPrimary);
 }
 
 .warning {
   background: var(--colors-warning);
-  color: #111827;
-
-  &:hover:not(:disabled) {
-    background: #eab308;
-  }
-
-  &:active:not(:disabled) {
-    background: #ca8a04;
-  }
+  color: var(--colors-textPrimary);
 }
 
 .info {
   background: var(--colors-info);
-  color: white;
-
-  &:hover:not(:disabled) {
-    background: #0284c7;
-  }
-
-  &:active:not(:disabled) {
-    background: #0369a1;
-  }
+  color: var(--colors-textOnPrimary);
 }
 
 .soft {
-  background: rgba(37, 99, 235, 0.1);
+  background: var(--colors-surface);
   color: var(--colors-primary);
-  border: 1px solid rgba(37, 99, 235, 0.3);
+  border-color: var(--colors-border);
 
   &:hover:not(:disabled) {
-    background: rgba(37, 99, 235, 0.15);
-    border-color: rgba(37, 99, 235, 0.5);
+    background: var(--colors-secondary);
   }
 
   &:active:not(:disabled) {
-    background: rgba(37, 99, 235, 0.2);
+    background: var(--colors-secondaryHover);
   }
 }
 
-// Size variants
 .sm {
-  padding: 6px 12px;
-  font-size: 12px;
+  min-height: var(--components-control-height-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--typography-caption-fontSize);
 }
 
 .md {
+  min-height: var(--components-control-height-md);
   padding: var(--spacing-sm) var(--spacing-md);
-  font-size: 14px;
+  font-size: var(--typography-button-fontSize);
 }
 
 .lg {
+  min-height: var(--components-control-height-lg);
   padding: var(--spacing-md) var(--spacing-lg);
-  font-size: 16px;
+  font-size: var(--typography-body-fontSize);
 }

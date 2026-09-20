@@ -1,81 +1,104 @@
 "use client";
 
 import React from "react";
-import styles from "./Input.module.scss";
 import clsx from "clsx";
+import styles from "./Input.module.scss";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export type InputGap = "xs" | "sm" | "md" | "lg";
+
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  name: string;
   error?: string;
   helperText?: string;
   wrapperClassName?: string;
+  gap?: InputGap;
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      label,
-      name,
-      id,
-      error,
-      helperText,
-      className,
-      wrapperClassName,
-      required,
-      ...props
-    },
-    ref,
-  ) => {
-    const inputId = id ?? name;
-    const errorId = `${inputId}-error`;
-    const helperId = `${inputId}-helper`;
+const Input = ({
+  label,
+  id,
+  error,
+  helperText,
+  className,
+  wrapperClassName,
+  gap = "xs",
+  required,
+  disabled,
+  readOnly,
+  ...props
+}: InputProps) => {
+  const generatedId = React.useId();
+  const inputId = id ?? `input-${generatedId}`;
 
-    const ariaDescribedBy = [
-      error && errorId,
-      helperText && !error && helperId,
-    ]
-      .filter(Boolean)
-      .join(" ");
+  const errorId = `${inputId}-error`;
+  const helperId = `${inputId}-helper`;
 
-    return (
-      <div className={`${styles.wrapper} ${wrapperClassName ?? ""}`.trim()}>
-        {label && (
-          <label className={styles.label} htmlFor={inputId}>
-            {label}
-            {required && (
-              <span className={styles.required} aria-hidden="true">
-                *
-              </span>
-            )}
-          </label>
-        )}
+  const ariaDescribedBy = [
+    error && errorId,
+    helperText && !error && helperId,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-        <input
-          ref={ref}
-          id={inputId}
-          name={name}
-          required={required}
-          aria-invalid={!!error}
-          aria-describedby={ariaDescribedBy || undefined}
-          className={clsx(
-            styles.input,
-            error && styles.invalid,
-            className,
+  return (
+    <div
+      className={clsx(
+        styles.wrapper,
+        styles[`gap-${gap}`],
+        wrapperClassName,
+      )}
+    >
+      {label && (
+        <label className={styles.label} htmlFor={inputId}>
+          {label}
+
+          {required && (
+            <span
+              className={styles.required}
+              aria-hidden="true"
+            >
+              *
+            </span>
           )}
-          {...props}
-        />
+        </label>
+      )}
 
-        {error && <div className={styles.error} id={errorId}>{error}</div>}
-
-        {helperText && !error && (
-          <div className={styles.helperText} id={helperId}>{helperText}</div>
+      <input
+        id={inputId}
+        required={required}
+        disabled={disabled}
+        readOnly={readOnly}
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby={ariaDescribedBy || undefined}
+        className={clsx(
+          styles.input,
+          error && styles.invalid,
+          className,
         )}
-      </div>
-    );
-  },
-);
+        {...props}
+      />
 
-Input.displayName = "Input";
+      {error && (
+        <div
+          className={styles.error}
+          id={errorId}
+          role="alert"
+        >
+          {error}
+        </div>
+      )}
+
+      {helperText && !error && (
+        <div
+          className={styles.helperText}
+          id={helperId}
+        >
+          {helperText}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Input;

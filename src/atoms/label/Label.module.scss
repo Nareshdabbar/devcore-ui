@@ -1,12 +1,6 @@
 .label {
-  font-size: var(--typography-button-fontSize);
-  font-weight: var(--typography-button-fontWeight);
-  color: var(--colors-textPrimary);
-  display: block;
-  font-family: var(--typography-fontFamily);
-}
-
-.required {
-  color: var(--colors-error);
-  margin-left: var(--spacing-xs);
+display: block;
+font-size: var(--typography-button-fontSize);
+font-weight: var(--typography-button-fontWeight);
+color: var(--colors-textPrimary);
 }

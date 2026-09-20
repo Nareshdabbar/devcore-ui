@@ -1,17 +1,21 @@
 # DevCore UI Components
 
-Reusable React UI components with a lightweight SCSS theme system and CSS Modules-based styles.
+Reusable React UI components with a lightweight SCSS theme system, CSS Modules, and CSS custom properties.
 
-`@dev-core-ui/components` is designed for app teams that want a small, consistent set of form and text primitives without bringing in a heavy design system.
+`@dev-core-ui/components` is designed for application teams that want a small, consistent, customizable UI foundation without bringing in a large design system.
 
 ## Highlights
 
-- 11 exported UI atoms
-- React 18 and React 19 support
-- TypeScript declarations included
-- CSS variable driven theming
-- SCSS theme files available for custom builds
-- Package-ready `styles` export for one-line CSS imports
+* 17 reusable UI components
+* React 18 and React 19 support
+* TypeScript declarations included
+* CSS custom property driven theming
+* SCSS-based component styling
+* CSS Modules for component styles
+* Light, dark, and system theme support
+* Native HTML behavior and accessibility where appropriate
+* No UI framework dependency
+* Small dependency footprint
 
 ## Installation
 
@@ -19,41 +23,47 @@ Reusable React UI components with a lightweight SCSS theme system and CSS Module
 npm install @dev-core-ui/components
 ```
 
-Peer dependencies:
+The package requires React and React DOM as peer dependencies.
 
-- `react`
-- `react-dom`
-
-If your app does not already support Sass, install it too:
-
-```bash
-npm install sass
-```
+If your application does not already use Sass, you only need Sass when you want to work directly with SCSS in your application. The published package includes compiled CSS.
 
 ## Quick Start
 
-Import the library and its styles once at the app root:
+Import the components you need and import the package styles once at the application root.
 
 ```tsx
-import { Button, Input, Text } from "@dev-core-ui/components";
+import {
+  Button,
+  Input,
+  Text,
+} from "@dev-core-ui/components";
+
 import "@dev-core-ui/components/styles";
 
 export default function App() {
   return (
     <div>
       <Text variant="h1">Welcome to DevCore UI</Text>
-      <Input name="email" label="Email" type="email" />
-      <Button variant="primary">Submit</Button>
+
+      <Input
+        name="email"
+        label="Email"
+        type="email"
+      />
+
+      <Button variant="primary">
+        Submit
+      </Button>
     </div>
   );
 }
 ```
 
-## Framework Notes
+## Framework Usage
 
 ### Next.js
 
-Import the package styles in your root layout:
+Import the package styles once in the root layout.
 
 ```tsx
 import "@dev-core-ui/components/styles";
@@ -71,27 +81,19 @@ export default function RootLayout({
 }
 ```
 
-### Vite, CRA, Remix, and others
+### Vite, CRA, Remix, and other React applications
 
-Import the styles once near your application entry point:
+Import the package styles once near the application entry point.
 
 ```tsx
 import "@dev-core-ui/components/styles";
 ```
 
-## Available Components
+## Components
 
 ### Button
 
-Primary button with loading and size variants.
-
-Props:
-
-- `variant`: `primary | secondary | ghost | danger`
-- `size`: `sm | md | lg`
-- `isLoading`: `boolean`
-
-Example:
+Reusable button with variants, sizes, loading state, and native button attributes.
 
 ```tsx
 <Button variant="primary" size="md">
@@ -99,19 +101,16 @@ Example:
 </Button>
 ```
 
+Common props:
+
+* `variant`: `primary | secondary | ghost | danger`
+* `size`: `sm | md | lg`
+* `isLoading`: `boolean`
+* Native button attributes are supported.
+
 ### Input
 
-Text input with optional label, helper text, and error state.
-
-Props:
-
-- `name`: `string` required
-- `label`: `string`
-- `error`: `string`
-- `helperText`: `string`
-- `wrapperClassName`: `string`
-
-Example:
+Text input with label, helper text, error state, and native input attributes.
 
 ```tsx
 <Input
@@ -119,22 +118,13 @@ Example:
   label="Email"
   type="email"
   placeholder="name@example.com"
-  helperText="We\'ll never share your email."
+  helperText="We'll never share your email."
 />
 ```
 
 ### Select
 
-Dropdown select with optional `options` or custom children.
-
-Props:
-
-- `label`: `string`
-- `error`: `string`
-- `options`: `{ value: string; label: string }[]`
-- `wrapperClassName`: `string`
-
-Example:
+Reusable select control supporting options or custom children.
 
 ```tsx
 <Select
@@ -149,45 +139,30 @@ Example:
 
 ### Checkbox
 
-Checkbox with optional label and native input props.
-
-Props:
-
-- `label`: `string`
-- `wrapperClassName`: `string`
-
-Example:
+Reusable checkbox with label and native checkbox attributes.
 
 ```tsx
-<Checkbox name="terms" label="I agree to the terms" />
+<Checkbox
+  name="terms"
+  label="I agree to the terms"
+/>
 ```
 
 ### Textarea
 
-Multi-line text input with label, helper text, and error state.
-
-Props:
-
-- `label`: `string`
-- `error`: `string`
-- `helperText`: `string`
-- `wrapperClassName`: `string`
-
-Example:
+Multi-line input with label, helper text, error state, and native textarea attributes.
 
 ```tsx
-<Textarea name="message" label="Message" rows={4} />
+<Textarea
+  name="message"
+  label="Message"
+  rows={4}
+/>
 ```
 
 ### Label
 
-Accessible label with an optional required marker.
-
-Props:
-
-- `required`: `boolean`
-
-Example:
+Reusable accessible label.
 
 ```tsx
 <Label htmlFor="email" required>
@@ -197,17 +172,7 @@ Example:
 
 ### Text
 
-Semantic text primitive for headings, body text, captions, and code.
-
-Props:
-
-- `variant`: `h1 | h2 | h3 | h4 | h5 | h6 | p | label | small | caption | code`
-- `size`: `xs | sm | md | lg | xl | 2xl | 3xl | 4xl`
-- `weight`: `light | normal | medium | semibold | bold`
-- `color`: `primary | text | text-light | error | success | warning`
-- `as`: custom element override
-
-Example:
+Semantic text primitive for headings and other text content.
 
 ```tsx
 <Text variant="h2" color="primary">
@@ -217,83 +182,219 @@ Example:
 
 ### FileUpload
 
-File input with built-in max-size validation.
-
-Props:
-
-- `label`: `string`
-- `error`: `string`
-- `accept`: `string`
-- `maxSize`: `number` in MB
-- `wrapperClassName`: `string`
-
-Example:
+Reusable file input with file-size validation support.
 
 ```tsx
-<FileUpload name="resume" label="Upload resume" accept=".pdf,.doc,.docx" />
+<FileUpload
+  name="resume"
+  label="Upload resume"
+  accept=".pdf,.doc,.docx"
+/>
 ```
 
 ### FormCard
 
-Simple container for form sections.
-
-Props:
-
-- standard `div` props
-
-Example:
+Reusable container for grouping form content.
 
 ```tsx
-<FormCard style={{ padding: 24 }}>
-  <Input name="fullName" label="Full name" />
-  <Button type="submit">Submit</Button>
+<FormCard>
+  <Input
+    name="fullName"
+    label="Full name"
+  />
+
+  <Button type="submit">
+    Submit
+  </Button>
 </FormCard>
 ```
 
 ### Required
 
-Renders a required-field marker.
-
-Props:
-
-- `color`: `string`
-
-Example:
+Reusable required-field marker.
 
 ```tsx
-<Required color="#ef4444" />
+<Required />
 ```
 
 ### Divider
 
 Horizontal or vertical separator.
 
-Props:
-
-- `orientation`: `horizontal | vertical`
-- `color`: `string`
-- `thickness`: `string`
-- `length`: `string`
-
-Example:
-
 ```tsx
 <Divider />
-<Divider orientation="vertical" length="24px" />
+
+<Divider
+  orientation="vertical"
+  length="24px"
+/>
 ```
+
+### Badge
+
+Reusable status or label indicator with theme-based variants and sizes.
+
+```tsx
+<Badge variant="success">
+  Active
+</Badge>
+```
+
+Available variants:
+
+* `primary`
+* `secondary`
+* `success`
+* `warning`
+* `error`
+* `info`
+* `neutral`
+
+Available sizes:
+
+* `sm`
+* `md`
+* `lg`
+
+### Spinner
+
+Reusable loading indicator.
+
+```tsx
+<Spinner size="md" />
+```
+
+Available sizes:
+
+* `sm`
+* `md`
+* `lg`
+
+A custom accessible label can be provided:
+
+```tsx
+<Spinner label="Loading results" />
+```
+
+### Modal
+
+Controlled modal built on the native HTML `<dialog>` element.
+
+```tsx
+<Modal
+  open={open}
+  title="Confirm action"
+  onClose={() => setOpen(false)}
+>
+  Are you sure you want to continue?
+</Modal>
+```
+
+Available placement options:
+
+* `center`
+* `top`
+* `bottom`
+* `left`
+* `right`
+
+The Modal does not impose a fixed width or maximum width. Applications can control dimensions and layout through `className`, `style`, or CSS custom properties.
+
+The following behavior can also be controlled:
+
+* `showCloseButton`
+* `closeOnOverlayClick`
+* `closeOnEscape`
+
+### Radio
+
+Reusable native radio control with customizable label content.
+
+```tsx
+<Radio
+  name="plan"
+  value="pro"
+  label="Professional"
+/>
+```
+
+The component preserves native radio behavior and supports native input attributes.
+
+### RadioGroup
+
+Reusable fieldset for grouping Radio components.
+
+```tsx
+<RadioGroup
+  name="plan"
+  legend="Choose a plan"
+  orientation="vertical"
+>
+  <Radio
+    name="plan"
+    value="starter"
+    label="Starter"
+  />
+
+  <Radio
+    name="plan"
+    value="pro"
+    label="Professional"
+  />
+</RadioGroup>
+```
+
+Available orientations:
+
+* `vertical`
+* `horizontal`
+
+Layout spacing can be customized using the component's CSS custom properties instead of requiring project-specific spacing props.
+
+### EmptyState
+
+Reusable empty-content presentation for lists, tables, search results, dashboards, and other application areas.
+
+```tsx
+<EmptyState
+  heading="No products found"
+  description="There are no products available yet."
+  action={
+    <Button>
+      Add Product
+    </Button>
+  }
+/>
+```
+
+Supports:
+
+* `heading`
+* `description`
+* `icon`
+* `action`
+* custom children
+* native `div` attributes
+
+The component does not impose application-specific actions or illustrations.
 
 ## Theming
 
-The package ships with SCSS theme files and CSS variables.
+DevCore UI uses CSS custom properties for runtime theming.
 
-You can override the theme values in your global stylesheet after importing the package styles:
+Import the package styles first:
+
+```tsx
+import "@dev-core-ui/components/styles";
+```
+
+Then override the variables from your application's stylesheet:
 
 ```scss
 :root {
-  --colors-background: #ffffff;
-  --colors-surface: #f8fafc;
-  --colors-textPrimary: #111827;
   --colors-primary: #2563eb;
+  --colors-surface: #ffffff;
+  --colors-textPrimary: #111827;
   --colors-border: #e5e7eb;
 
   --spacing-sm: 8px;
@@ -306,64 +407,263 @@ You can override the theme values in your global stylesheet after importing the 
 }
 ```
 
-Theme source files are also exposed for apps that want to import the SCSS directly:
+This allows an application to customize DevCore UI without modifying the package source.
 
-```scss
-@import "@dev-core-ui/components/theme/theme.scss";
+## Theme Modes
+
+The theme supports:
+
+* Light
+* Dark
+* System
+
+Theme selection can be controlled with the `data-theme` attribute:
+
+```html
+<html data-theme="dark">
 ```
+
+Supported values:
+
+```text
+light
+dark
+system
+```
+
+When `data-theme="system"` is used, the theme follows the user's `prefers-color-scheme` preference.
 
 ## Theme Tokens
 
-Color variables:
+### Colors
 
-- `--colors-background`
-- `--colors-surface`
-- `--colors-overlay`
-- `--colors-textPrimary`
-- `--colors-textSecondary`
-- `--colors-textDisabled`
-- `--colors-primary`
-- `--colors-primaryHover`
-- `--colors-primaryActive`
-- `--colors-secondary`
-- `--colors-accent`
-- `--colors-success`
-- `--colors-warning`
-- `--colors-error`
-- `--colors-info`
-- `--colors-border`
-- `--colors-shadow`
+```text
+--colors-background
+--colors-surface
+--colors-surfaceRaised
+--colors-overlay
 
-Spacing variables:
+--colors-textPrimary
+--colors-textSecondary
+--colors-textDisabled
+--colors-textOnPrimary
 
-- `--spacing-xxs`
-- `--spacing-xs`
-- `--spacing-sm`
-- `--spacing-md`
-- `--spacing-lg`
-- `--spacing-xl`
+--colors-primary
+--colors-primaryHover
+--colors-primaryActive
 
-Radius variables:
+--colors-secondary
+--colors-secondaryHover
+--colors-secondaryActive
 
-- `--radius-none`
-- `--radius-sm`
-- `--radius-md`
-- `--radius-lg`
-- `--radius-pill`
+--colors-accent
+
+--colors-success
+--colors-warning
+--colors-error
+--colors-info
+
+--colors-border
+--colors-borderStrong
+--colors-focus
+--colors-shadow
+```
+
+### Typography
+
+```text
+--typography-fontFamily
+
+--typography-fontWeight-regular
+--typography-fontWeight-medium
+--typography-fontWeight-semibold
+--typography-fontWeight-bold
+
+--typography-title-fontSize
+--typography-title-fontWeight
+--typography-title-lineHeight
+
+--typography-sectionTitle-fontSize
+--typography-sectionTitle-fontWeight
+--typography-sectionTitle-lineHeight
+
+--typography-subsection-fontSize
+--typography-subsection-fontWeight
+--typography-subsection-lineHeight
+
+--typography-body-fontSize
+--typography-body-fontWeight
+--typography-body-lineHeight
+
+--typography-bodySmall-fontSize
+--typography-bodySmall-fontWeight
+--typography-bodySmall-lineHeight
+
+--typography-caption-fontSize
+--typography-caption-fontWeight
+--typography-caption-lineHeight
+
+--typography-button-fontSize
+--typography-button-fontWeight
+--typography-button-lineHeight
+```
+
+### Spacing
+
+```text
+--spacing-xxs
+--spacing-xs
+--spacing-sm
+--spacing-md
+--spacing-lg
+--spacing-xl
+```
+
+### Radius
+
+```text
+--radius-none
+--radius-sm
+--radius-md
+--radius-lg
+--radius-pill
+```
+
+### Shadows
+
+```text
+--shadow-xs
+--shadow-sm
+--shadow-md
+--shadow-lg
+```
+
+### Borders and focus
+
+```text
+--border-width
+--border-style
+--focus-ring-width
+```
+
+### Z-index
+
+```text
+--zIndex-dropdown
+--zIndex-modal
+--zIndex-tooltip
+```
+
+### Motion
+
+```text
+--motion-fast
+--motion-normal
+--motion-slow
+--motion-easing
+```
+
+### Component sizes
+
+```text
+--components-button-height
+--components-control-height-sm
+--components-control-height-md
+--components-control-height-lg
+```
+
+## Component Customization
+
+Components are designed to be customized by the consuming application.
+
+Use:
+
+* `className`
+* native HTML attributes
+* CSS custom properties
+* application-level CSS
+
+For example:
+
+```scss
+.customModal {
+  width: min(90vw, 900px);
+}
+
+.compactRadioGroup {
+  --radio-group-gap: var(--spacing-sm);
+}
+
+.customRadio {
+  --radio-gap: var(--spacing-xs);
+}
+```
+
+DevCore UI avoids forcing application-specific widths, layouts, spacing, and business rules into reusable components.
 
 ## Package Exports
 
-- `@dev-core-ui/components`
-- `@dev-core-ui/components/styles`
-- `@dev-core-ui/components/theme/*`
+The main package export:
+
+```text
+@dev-core-ui/components
+```
+
+Compiled package styles:
+
+```text
+@dev-core-ui/components/styles
+```
+
+Example:
+
+```tsx
+import {
+  Button,
+  Badge,
+  Modal,
+  Radio,
+  RadioGroup,
+  EmptyState,
+} from "@dev-core-ui/components";
+
+import "@dev-core-ui/components/styles";
+```
+
+## TypeScript
+
+TypeScript declarations are included with the package.
+
+Component prop types are exported from the main package:
+
+```tsx
+import type {
+  ButtonProps,
+  BadgeProps,
+  ModalProps,
+  RadioProps,
+  RadioGroupProps,
+  EmptyStateProps,
+} from "@dev-core-ui/components";
+```
 
 ## Build
+
+Build the package with:
 
 ```bash
 npm run build
 ```
 
-This builds the package with `tsup` and copies the theme files into `theme/`.
+The build generates:
+
+* ESM output
+* CommonJS output
+* TypeScript declaration files
+* Compiled CSS
+* Source maps
+
+The generated files are written to the `dist` directory.
 
 ## Release
 
@@ -373,12 +673,23 @@ The project uses `standard-version` for versioning and changelog generation.
 npm run release
 ```
 
+Follow semantic versioning when releasing:
+
+* Patch: backward-compatible bug fixes
+* Minor: backward-compatible new functionality
+* Major: breaking API or behavior changes
+
 ## Browser Support
 
-- Chrome and Edge latest
-- Firefox latest
-- Safari latest
-- Modern mobile browsers
+DevCore UI targets modern browsers:
+
+* Latest Chrome
+* Latest Edge
+* Latest Firefox
+* Latest Safari
+* Modern mobile browsers
+
+Components use standard web platform features and native HTML behavior where appropriate.
 
 ## License
 

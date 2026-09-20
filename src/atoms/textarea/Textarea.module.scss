@@ -1,42 +1,77 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.gap-xs {
   gap: var(--spacing-xs);
 }
 
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
 .label {
+  display: block;
+  color: var(--colors-textPrimary);
   font-size: var(--typography-button-fontSize);
   font-weight: var(--typography-button-fontWeight);
-  color: var(--colors-textPrimary);
-  display: block;
+  line-height: var(--typography-button-lineHeight);
 }
 
 .textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
   min-height: 100px;
+  box-sizing: border-box;
+
   padding: var(--spacing-sm) var(--spacing-md);
+
   border: var(--border-width) var(--border-style) var(--colors-border);
   border-radius: var(--radius-md);
+
+  background: var(--colors-surface);
+  color: var(--colors-textPrimary);
+
   font-size: var(--typography-body-fontSize);
   font-family: var(--typography-fontFamily);
-  color: var(--colors-textPrimary);
-  background: var(--colors-surface);
+  line-height: var(--typography-body-lineHeight);
+
   resize: vertical;
-  transition: border-color var(--motion-fast) var(--motion-easing), box-shadow var(--motion-fast) var(--motion-easing);
+
+  transition:
+    border-color var(--motion-fast) var(--motion-easing),
+    box-shadow var(--motion-fast) var(--motion-easing),
+    background-color var(--motion-fast) var(--motion-easing);
 
   &:focus {
     outline: none;
-    border-color: var(--colors-primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+    border-color: var(--colors-focus);
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--colors-focus);
+
   }
 
   &:disabled {
     background: var(--colors-background);
     color: var(--colors-textDisabled);
     cursor: not-allowed;
+    opacity: var(--opacity-disabled);
   }
 
   &::placeholder {
     color: var(--colors-textSecondary);
+    opacity: 1;
   }
 }
 
@@ -44,23 +79,24 @@
   border-color: var(--colors-error);
 
   &:focus {
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+    border-color: var(--colors-error);
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--colors-error);
   }
 }
 
 .error {
   color: var(--colors-error);
   font-size: var(--typography-caption-fontSize);
-  margin-top: var(--spacing-xs);
+  line-height: var(--typography-caption-lineHeight);
 }
 
 .helperText {
   color: var(--colors-textSecondary);
   font-size: var(--typography-caption-fontSize);
-  margin-top: var(--spacing-xs);
+  line-height: var(--typography-caption-lineHeight);
 }
 
 .required {
-  margin-left: 0.2rem;
+  margin-left: var(--spacing-xxs);
   color: var(--colors-error);
 }

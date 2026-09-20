@@ -1,50 +1,78 @@
 "use client";
 
 import React from "react";
+import clsx from "clsx";
 import styles from "./Divider.module.scss";
 
-type Orientation = "horizontal" | "vertical";
+export type DividerOrientation = "horizontal" | "vertical";
 
-interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
-  orientation?: Orientation;
-  color?: string;
-  thickness?: string;
-  length?: string;
+export type DividerColor =
+| "border"
+| "borderStrong"
+| "primary"
+| "secondary"
+| "success"
+| "warning"
+| "error"
+| "info";
+
+export interface DividerProps
+extends React.HTMLAttributes<HTMLDivElement> {
+orientation?: DividerOrientation;
+color?: DividerColor;
+thickness?: string;
+length?: string;
 }
 
-const Divider = React.forwardRef<HTMLDivElement, DividerProps>(
-  (
-    {
-      orientation = "horizontal",
-      className,
-      color,
-      thickness,
-      length,
-      style,
-      ...props
-    },
-    ref
-  ) => {
-    const dividerStyle: React.CSSProperties = {
-      backgroundColor: color ?? "var(--colors-border)",
-      width: orientation === "horizontal" ? length ?? "100%" : thickness ?? "1px",
-      height: orientation === "horizontal" ? thickness ?? "1px" : length ?? "100%",
-      ...style,
-    };
+const colorVariables: Record<DividerColor, string> = {
+border: "var(--colors-border)",
+borderStrong: "var(--colors-borderStrong)",
+primary: "var(--colors-primary)",
+secondary: "var(--colors-secondary)",
+success: "var(--colors-success)",
+warning: "var(--colors-warning)",
+error: "var(--colors-error)",
+info: "var(--colors-info)",
+};
 
-    return (
-      <div
-        ref={ref}
-        role="separator"
-        aria-orientation={orientation}
-        className={`${styles.divider} ${styles[orientation]} ${className ?? ""}`.trim()}
-        style={dividerStyle}
-        {...props}
-      />
-    );
-  }
+const Divider = ({
+orientation = "horizontal",
+className,
+color = "border",
+thickness,
+length,
+style,
+...props
+}: DividerProps) => {
+const dividerStyle: React.CSSProperties = {
+backgroundColor: colorVariables[color],
+...(orientation === "horizontal"
+? {
+...(length ? { width: length } : {}),
+...(thickness ? { height: thickness } : {}),
+}
+: {
+...(thickness ? { width: thickness } : {}),
+...(length ? { height: length } : {}),
+}),
+...style,
+};
+
+return (
+<div
+role="separator"
+aria-orientation={
+orientation === "vertical" ? "vertical" : undefined
+}
+className={clsx(
+styles.divider,
+styles[orientation],
+className,
+)}
+style={dividerStyle}
+{...props}
+/>
 );
-
-Divider.displayName = "Divider";
+};
 
 export default Divider;

@@ -1,65 +1,112 @@
-// Default theme entry for DevCore UI.
-// This file defines the library's global CSS custom properties used by all components.
-// src/theme/theme.scss
 @use "./variables" as *;
+@use "./colors" as colors;
+
+@mixin light-theme {
+  --colors-background: #{colors.$light-background};
+  --colors-surface: #{colors.$light-surface};
+  --colors-surfaceRaised: #{colors.$light-surface-raised};
+  --colors-overlay: #{colors.$light-overlay};
+
+  --colors-textPrimary: #{colors.$light-text-primary};
+  --colors-textSecondary: #{colors.$light-text-secondary};
+  --colors-textDisabled: #{colors.$light-text-disabled};
+  --colors-textOnPrimary: #{colors.$light-text-on-primary};
+
+  --colors-primary: #{colors.$light-primary};
+  --colors-primaryHover: #{colors.$light-primary-hover};
+  --colors-primaryActive: #{colors.$light-primary-active};
+
+  --colors-secondary: #{colors.$light-secondary};
+  --colors-secondaryHover: #{colors.$light-secondary-hover};
+  --colors-secondaryActive: #{colors.$light-secondary-active};
+
+  --colors-accent: #{colors.$light-accent};
+
+  --colors-success: #{colors.$light-success};
+  --colors-warning: #{colors.$light-warning};
+  --colors-error: #{colors.$light-error};
+  --colors-info: #{colors.$light-info};
+
+  --colors-border: #{colors.$light-border};
+  --colors-borderStrong: #{colors.$light-border-strong};
+  --colors-focus: #{colors.$light-focus};
+  --colors-shadow: #{colors.$light-shadow};
+}
+
+@mixin dark-theme {
+  --colors-background: #{colors.$dark-background};
+  --colors-surface: #{colors.$dark-surface};
+  --colors-surfaceRaised: #{colors.$dark-surface-raised};
+  --colors-overlay: #{colors.$dark-overlay};
+
+  --colors-textPrimary: #{colors.$dark-text-primary};
+  --colors-textSecondary: #{colors.$dark-text-secondary};
+  --colors-textDisabled: #{colors.$dark-text-disabled};
+  --colors-textOnPrimary: #{colors.$dark-text-on-primary};
+
+  --colors-primary: #{colors.$dark-primary};
+  --colors-primaryHover: #{colors.$dark-primary-hover};
+  --colors-primaryActive: #{colors.$dark-primary-active};
+
+  --colors-secondary: #{colors.$dark-secondary};
+  --colors-secondaryHover: #{colors.$dark-secondary-hover};
+  --colors-secondaryActive: #{colors.$dark-secondary-active};
+
+  --colors-accent: #{colors.$dark-accent};
+
+  --colors-success: #{colors.$dark-success};
+  --colors-warning: #{colors.$dark-warning};
+  --colors-error: #{colors.$dark-error};
+  --colors-info: #{colors.$dark-info};
+
+  --colors-border: #{colors.$dark-border};
+  --colors-borderStrong: #{colors.$dark-border-strong};
+  --colors-focus: #{colors.$dark-focus};
+  --colors-shadow: #{colors.$dark-shadow};
+}
+
 :root {
-  /* colors */
-  --colors-background: #{$color-background};
-  --colors-surface: #{$color-surface};
-  --colors-overlay: #{$color-overlay};
+  @include light-theme;
 
-  --colors-textPrimary: #{$color-textPrimary};
-  --colors-textSecondary: #{$color-textSecondary};
-  --colors-textDisabled: #{$color-textDisabled};
-
-  --colors-primary: #{$color-primary};
-  --colors-primaryHover: #{$color-primary-hover};
-  --colors-primaryActive: #{$color-primary-active};
-
-  --colors-secondary: #{$color-secondary};
-  --colors-accent: #{$color-accent};
-
-  --colors-success: #{$color-success};
-  --colors-warning: #{$color-warning};
-  --colors-error: #{$color-error};
-  --colors-info: #{$color-info};
-
-  --colors-border: #{$color-border};
-  --colors-shadow: #{$color-shadow};
-
-  /* typography - semantic variants for Text component */
   --typography-fontFamily: #{$font-family};
-  
-  --typography-title-fontSize: 32px;
-  --typography-title-fontWeight: 700;
-  --typography-title-lineHeight: 40px;
-  
-  --typography-sectionTitle-fontSize: 24px;
-  --typography-sectionTitle-fontWeight: 600;
-  --typography-sectionTitle-lineHeight: 32px;
-  
-  --typography-subsection-fontSize: 20px;
-  --typography-subsection-fontWeight: 600;
-  --typography-subsection-lineHeight: 28px;
-  
-  --typography-body-fontSize: 16px;
-  --typography-body-fontWeight: 400;
-  --typography-body-lineHeight: 24px;
-  
-  --typography-bodySmall-fontSize: 14px;
-  --typography-bodySmall-fontWeight: 400;
-  --typography-bodySmall-lineHeight: 20px;
-  
-  --typography-caption-fontSize: 12px;
-  --typography-caption-fontWeight: 400;
-  --typography-caption-lineHeight: 16px;
 
-  /* component typography */
-  --typography-button-fontSize: 14px;
-  --typography-button-fontWeight: 500;
-  --typography-button-lineHeight: 20px;
+  --typography-fontWeight-regular: #{$font-weight-regular};
+  --typography-fontWeight-medium: #{$font-weight-medium};
+  --typography-fontWeight-semibold: #{$font-weight-semibold};
+  --typography-fontWeight-bold: #{$font-weight-bold};
 
-  /* spacing */
+  --typography-title-letterSpacing: #{$letter-spacing-title};
+  --typography-sectionTitle-letterSpacing: #{$letter-spacing-section-title};
+  --typography-subsection-letterSpacing: #{$letter-spacing-subsection};
+
+  --typography-title-fontSize: #{$font-size-title};
+  --typography-title-fontWeight: #{$font-weight-bold};
+  --typography-title-lineHeight: #{$line-height-title};
+
+  --typography-sectionTitle-fontSize: #{$font-size-section-title};
+  --typography-sectionTitle-fontWeight: #{$font-weight-semibold};
+  --typography-sectionTitle-lineHeight: #{$line-height-section-title};
+
+  --typography-subsection-fontSize: #{$font-size-subsection};
+  --typography-subsection-fontWeight: #{$font-weight-semibold};
+  --typography-subsection-lineHeight: #{$line-height-subsection};
+
+  --typography-body-fontSize: #{$font-size-body};
+  --typography-body-fontWeight: #{$font-weight-regular};
+  --typography-body-lineHeight: #{$line-height-body};
+
+  --typography-bodySmall-fontSize: #{$font-size-body-small};
+  --typography-bodySmall-fontWeight: #{$font-weight-regular};
+  --typography-bodySmall-lineHeight: #{$line-height-body-small};
+
+  --typography-caption-fontSize: #{$font-size-caption};
+  --typography-caption-fontWeight: #{$font-weight-regular};
+  --typography-caption-lineHeight: #{$line-height-caption};
+
+  --typography-button-fontSize: #{$font-size-button};
+  --typography-button-fontWeight: #{$font-weight-medium};
+  --typography-button-lineHeight: #{$line-height-button};
+
   --spacing-xxs: #{$spacing-xxs};
   --spacing-xs: #{$spacing-xs};
   --spacing-sm: #{$spacing-sm};
@@ -67,34 +114,50 @@
   --spacing-lg: #{$spacing-lg};
   --spacing-xl: #{$spacing-xl};
 
-  /* radius */
   --radius-none: #{$radius-none};
   --radius-sm: #{$radius-sm};
   --radius-md: #{$radius-md};
   --radius-lg: #{$radius-lg};
   --radius-pill: #{$radius-pill};
 
-  /* shadow */
   --shadow-xs: #{$shadow-xs};
   --shadow-sm: #{$shadow-sm};
   --shadow-md: #{$shadow-md};
   --shadow-lg: #{$shadow-lg};
 
-  /* border */
   --border-width: #{$border-width};
   --border-style: #{$border-style};
+  --focus-ring-width: #{$focus-ring-width};
 
-  /* z-index */
-  --zIndex-dropdown: 1000;
-  --zIndex-modal: 1300;
-  --zIndex-tooltip: 1500;
+  --zIndex-dropdown: #{$z-index-dropdown};
+  --zIndex-modal: #{$z-index-modal};
+  --zIndex-tooltip: #{$z-index-tooltip};
 
-  /* motion */
   --motion-fast: #{$motion-fast};
   --motion-normal: #{$motion-normal};
   --motion-slow: #{$motion-slow};
   --motion-easing: #{$motion-easing};
 
-  /* components */
-  --components-button-height: 40px;
+  --components-button-height: #{$component-button-height};
+  --components-control-height-sm: #{$control-height-sm};
+  --components-control-height-md: #{$control-height-md};
+  --components-control-height-lg: #{$control-height-lg};
+
+  --opacity-disabled: #{$opacity-disabled};
+}
+
+[data-theme="light"] {
+  @include light-theme;
+}
+
+[data-theme="dark"] {
+  @include dark-theme;
+}
+
+[data-theme="system"] {
+  @include light-theme;
+
+  @media (prefers-color-scheme: dark) {
+    @include dark-theme;
+  }
 }

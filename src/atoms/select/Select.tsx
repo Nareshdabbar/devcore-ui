@@ -1,105 +1,124 @@
 "use client";
 
 import React from "react";
-
+import clsx from "clsx";
 import styles from "./Select.module.scss";
 
-interface SelectOption {
+export interface SelectOption {
   value: string;
   label: string;
   disabled?: boolean;
 }
 
-interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  label?: string;
+export type SelectGap = "xs" | "sm" | "md" | "lg";
+
+export interface SelectProps
+  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  label?: React.ReactNode;
   error?: string;
   helperText?: string;
   options?: SelectOption[];
   wrapperClassName?: string;
+  gap?: SelectGap;
 }
 
-const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
-  (
-    {
-      label,
-      error,
-      helperText,
-      options,
-      children,
-      className,
-      wrapperClassName,
-      required,
-      name,
-      id,
-      onChange,
-      ...props
-    },
-    ref,
-  ) => {
-    const selectId = id ?? name;
-    const errorId = `${selectId}-error`;
-    const helperId = `${selectId}-helper`;
+const Select = ({
+  label,
+  error,
+  helperText,
+  options,
+  children,
+  className,
+  wrapperClassName,
+  required,
+  id,
+  gap = "xs",
+  ...props
+}: SelectProps) => {
+  const generatedId = React.useId();
+  const selectId = id ?? `select-${generatedId}`;
 
-    const ariaDescribedBy = [
-      error && errorId,
-      helperText && !error && helperId,
-    ]
-      .filter(Boolean)
-      .join(" ");
+  const errorId = `${selectId}-error`;
+  const helperId = `${selectId}-helper`;
 
-    return (
-      <div className={`${styles.wrapper} ${wrapperClassName ?? ""}`.trim()}>
-        {label && (
-          <label className={styles.label} htmlFor={selectId}>
-            {label}
+  const ariaDescribedBy = [
+    error && errorId,
+    helperText && !error && helperId,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-            {required && (
-              <span className={styles.required} aria-hidden="true">
-                *
-              </span>
-            )}
-          </label>
-        )}
-
-        <select
-          ref={ref}
-          id={selectId}
-          name={name}
-          required={required}
-          aria-invalid={!!error}
-          aria-describedby={ariaDescribedBy || undefined}
-          className={`${styles.select} ${
-            error ? styles.invalid : ""
-          } ${className ?? ""}`.trim()}
-          {...props}
-          onChange={(event) => {
-            onChange?.(event);
-            event.currentTarget.blur();
-          }}
+  return (
+    <div
+      className={clsx(
+        styles.wrapper,
+        styles[`gap-${gap}`],
+        wrapperClassName,
+      )}
+    >
+      {label && (
+        <label
+          className={styles.label}
+          htmlFor={selectId}
         >
-          {options
-            ? options.map((option, index) => (
-                <option
-                  key={`${option.value}-${index}`}
-                  value={option.value}
-                  disabled={option.disabled}
-                >
-                  {option.label}
-                </option>
-              ))
-            : children}
-        </select>
+          {label}
 
-        {error && <div className={styles.error} id={errorId}>{error}</div>}
+          {required && (
+            <span
+              className={styles.required}
+              aria-hidden="true"
+            >
+              *
+            </span>
+          )}
+        </label>
+      )}
 
-        {helperText && !error && (
-          <div className={styles.helperText} id={helperId}>{helperText}</div>
+      <select
+        id={selectId}
+        required={required}
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby={ariaDescribedBy || undefined}
+        className={clsx(
+          styles.select,
+          error && styles.invalid,
+          className,
         )}
-      </div>
-    );
-  },
-);
+        {...props}
+      >
+        {options
+          ? options.map((option) => (
+              <option
+                key={option.value}
+                value={option.value}
+                disabled={option.disabled}
+              >
+                {option.label}
+              </option>
+            ))
+          : children}
+      </select>
 
-Select.displayName = "Select";
+      {error && (
+        <div
+          className={styles.error}
+          id={errorId}
+          role="alert"
+        >
+          {error}
+        </div>
+      )}
+
+      {helperText && !error && (
+        <div
+          className={styles.helperText}
+          id={helperId}
+        >
+          {helperText}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Select;
