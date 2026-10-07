@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/Nareshdabbar/devcore-ui/compare/v1.2.0...v1.3.1) (2026-10-07)
+
+
+### Bug Fixes
+
+* update components and release workflow ([7052b1c](https://github.com/Nareshdabbar/devcore-ui/commit/7052b1c846bf533c569ec69729bfcd2ceac49c59))
+
 ## [1.2.0](https://github.com/Nareshdabbar/devcore-ui/compare/v1.0.3...v1.2.0) (2026-09-20)
 
 
