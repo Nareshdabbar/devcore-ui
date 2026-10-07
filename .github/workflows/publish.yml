@@ -2,8 +2,8 @@ name: Publish to NPM
 
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -31,19 +31,6 @@ jobs:
 
       - name: Build Library
         run: npm run build
-
-      - name: Verify Version
-        run: |
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          TAG_VERSION="${GITHUB_REF_NAME#v}"
-
-          echo "Package version: $PACKAGE_VERSION"
-          echo "Tag version: $TAG_VERSION"
-
-          if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
-            echo "Version mismatch: package.json=$PACKAGE_VERSION, tag=$TAG_VERSION"
-            exit 1
-          fi
 
       - name: Publish to NPM
         run: npm publish --access public
