@@ -23,6 +23,9 @@ jobs:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
 
+      - name: Show Package Version
+        run: echo "Publishing @dev-core-ui/components@$(node -p "require('./package.json').version")"
+
       - name: Install Dependencies
         run: npm ci
 
