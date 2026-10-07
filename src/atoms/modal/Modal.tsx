@@ -1,37 +1,58 @@
+"use client";
+
 import {
   useEffect,
   useId,
   useRef,
   type DialogHTMLAttributes,
+  type MouseEvent,
   type ReactNode,
+  type SyntheticEvent,
 } from "react";
 import clsx from "clsx";
 import styles from "./Modal.module.scss";
 
-export type ModalPlacement =
-  | "center"
-  | "top"
-  | "bottom"
-  | "left"
-  | "right";
+export type ModalPlacement = "center" | "top" | "bottom" | "left" | "right";
 
-export interface ModalProps
-  extends Omit<DialogHTMLAttributes<HTMLDialogElement>, "open" | "onClose"> {
+export interface ModalProps extends Omit<
+  DialogHTMLAttributes<HTMLDialogElement>,
+  "open" | "onClose"
+> {
   open: boolean;
   title?: string;
   placement?: ModalPlacement;
   showCloseButton?: boolean;
+  closeIcon?: ReactNode;
+  closeButtonAriaLabel?: string;
   closeOnOverlayClick?: boolean;
   closeOnEscape?: boolean;
   onClose: () => void;
   children: ReactNode;
 }
 
+const DefaultCloseIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    width="1em"
+    height="1em"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    aria-hidden="true"
+  >
+    <path d="M6 6l12 12" />
+    <path d="M18 6L6 18" />
+  </svg>
+);
+
 const Modal = ({
   open,
   title,
   placement = "center",
   showCloseButton = true,
+  closeIcon,
+  closeButtonAriaLabel = "Close dialog",
   closeOnOverlayClick = true,
   closeOnEscape = true,
   onClose,
@@ -60,7 +81,7 @@ const Modal = ({
     }
   }, [open]);
 
-  const handleCancel = (event: React.SyntheticEvent<HTMLDialogElement>) => {
+  const handleCancel = (event: SyntheticEvent<HTMLDialogElement>) => {
     if (!closeOnEscape) {
       event.preventDefault();
       return;
@@ -75,7 +96,7 @@ const Modal = ({
     }
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLDialogElement>) => {
+  const handleClick = (event: MouseEvent<HTMLDialogElement>) => {
     if (!closeOnOverlayClick) {
       return;
     }
@@ -103,11 +124,7 @@ const Modal = ({
     <dialog
       ref={dialogRef}
       id={id}
-      className={clsx(
-        styles.modal,
-        styles[placement],
-        className,
-      )}
+      className={clsx(styles.modal, styles[placement], className)}
       aria-labelledby={title ? titleId : undefined}
       aria-label={title ? undefined : ariaLabel}
       onCancel={handleCancel}
@@ -127,10 +144,10 @@ const Modal = ({
             <button
               type="button"
               className={styles.closeButton}
-              aria-label="Close dialog"
+              aria-label={closeButtonAriaLabel}
               onClick={onClose}
             >
-              <span aria-hidden="true">x</span>
+              {closeIcon ?? <DefaultCloseIcon />}
             </button>
           )}
         </header>

@@ -1,20 +1,30 @@
 .btn {
   box-sizing: border-box;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
+
   width: auto;
   min-width: 0;
+
   padding: var(--spacing-sm) var(--spacing-md);
+
   border: var(--border-width) var(--border-style) transparent;
   border-radius: var(--radius-md);
+
   background: transparent;
   color: var(--colors-textPrimary);
+
   font-size: var(--typography-button-fontSize);
   font-weight: var(--typography-button-fontWeight);
   line-height: var(--typography-button-lineHeight);
+
+  white-space: nowrap;
+
   cursor: pointer;
+
   transition:
     background-color var(--motion-fast) var(--motion-easing),
     border-color var(--motion-fast) var(--motion-easing),

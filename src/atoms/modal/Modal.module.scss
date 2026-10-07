@@ -1,13 +1,18 @@
 .modal {
   position: fixed;
   inset: auto;
+
   margin: auto;
   padding: 0;
+
   border: var(--border-width) var(--border-style) var(--colors-border);
   border-radius: var(--radius-lg);
+
   background: var(--colors-surface);
   color: var(--colors-textPrimary);
+
   box-shadow: var(--shadow-lg);
+
   overflow: auto;
 }
 
@@ -51,14 +56,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: var(--spacing-md);
+
   padding: var(--spacing-md) var(--spacing-lg);
+
   border-bottom: var(--border-width) var(--border-style) var(--colors-border);
 }
 
 .title {
   margin: 0;
+
   color: var(--colors-textPrimary);
+
   font-size: var(--typography-sectionTitle-fontSize);
   font-weight: var(--typography-sectionTitle-fontWeight);
   line-height: var(--typography-sectionTitle-lineHeight);
@@ -68,59 +78,40 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   flex-shrink: 0;
+
   width: var(--control-height-sm);
   height: var(--control-height-sm);
+
   padding: 0;
+
   border: 0;
   border-radius: var(--radius-sm);
+
   background: transparent;
   color: var(--colors-textSecondary);
-  font-size: var(--font-size-title);
+
+  font-size: var(--typography-body-fontSize);
   line-height: 1;
+
   cursor: pointer;
-}
 
-.closeButton:hover {
-  background: var(--colors-secondary);
-  color: var(--colors-textPrimary);
-}
+  transition:
+    background-color var(--motion-fast) var(--motion-easing),
+    color var(--motion-fast) var(--motion-easing);
 
-.closeButton:focus-visible {
-  outline: var(--focus-ring-width) var(--border-style) var(--colors-focus);
-  outline-offset: var(--spacing-xxs);
+  &:hover {
+    background: var(--colors-secondary);
+    color: var(--colors-textPrimary);
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) var(--border-style) var(--colors-focus);
+    outline-offset: var(--spacing-xxs);
+  }
 }
 
 .content {
   padding: var(--spacing-lg);
-}
-
-@media (max-width: 640px) {
-  .center {
-    width: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  }
-
-  .top {
-    width: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  }
-
-  .bottom {
-    width: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  }
-
-  .left,
-  .right {
-    width: 100%;
-    max-width: 100%;
-    border-radius: 0;
-  }
 }
