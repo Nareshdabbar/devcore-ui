@@ -14,13 +14,19 @@ import styles from "./Modal.module.scss";
 
 export type ModalPlacement = "center" | "top" | "bottom" | "left" | "right";
 
+export type ModalSize = "sm" | "md" | "lg" | "xl" | "full";
+
 export interface ModalProps extends Omit<
   DialogHTMLAttributes<HTMLDialogElement>,
-  "open" | "onClose"
+  "open" | "onClose" | "title"
 > {
   open: boolean;
   title?: string;
+  description?: string;
+  header?: ReactNode;
+  footer?: ReactNode;
   placement?: ModalPlacement;
+  size?: ModalSize;
   showCloseButton?: boolean;
   closeIcon?: ReactNode;
   closeButtonAriaLabel?: string;
@@ -49,7 +55,11 @@ const DefaultCloseIcon = () => (
 const Modal = ({
   open,
   title,
+  description,
+  header,
+  footer,
   placement = "center",
+  size = "md",
   showCloseButton = true,
   closeIcon,
   closeButtonAriaLabel = "Close dialog",
@@ -60,10 +70,16 @@ const Modal = ({
   className,
   id,
   "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   ...props
 }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
+  const descriptionId = useId();
+  const wasOpenRef = useRef(false);
+  const onCloseRef = useRef(onClose);
+
+  onCloseRef.current = onClose;
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -74,11 +90,17 @@ const Modal = ({
 
     if (open && !dialog.open) {
       dialog.showModal();
-    }
-
-    if (!open && dialog.open) {
+      wasOpenRef.current = true;
+    } else if (!open && dialog.open) {
+      wasOpenRef.current = false;
       dialog.close();
     }
+
+    return () => {
+      if (dialog.open) {
+        dialog.close();
+      }
+    };
   }, [open]);
 
   const handleCancel = (event: SyntheticEvent<HTMLDialogElement>) => {
@@ -87,17 +109,18 @@ const Modal = ({
       return;
     }
 
-    onClose();
+    onCloseRef.current();
   };
 
   const handleClose = () => {
-    if (open) {
-      onClose();
+    if (wasOpenRef.current) {
+      wasOpenRef.current = false;
+      onCloseRef.current();
     }
   };
 
   const handleClick = (event: MouseEvent<HTMLDialogElement>) => {
-    if (!closeOnOverlayClick) {
+    if (!closeOnOverlayClick || event.target !== dialogRef.current) {
       return;
     }
 
@@ -116,36 +139,62 @@ const Modal = ({
       event.clientY > rect.bottom;
 
     if (clickedOutside) {
-      onClose();
+      onCloseRef.current();
     }
   };
+
+  const hasHeader = Boolean(header || title || description || showCloseButton);
+
+  const resolvedLabelledBy = ariaLabelledBy
+    ? ariaLabelledBy
+    : title && !header
+      ? titleId
+      : undefined;
 
   return (
     <dialog
       ref={dialogRef}
       id={id}
-      className={clsx(styles.modal, styles[placement], className)}
-      aria-labelledby={title ? titleId : undefined}
-      aria-label={title ? undefined : ariaLabel}
+      className={clsx(
+        styles.modal,
+        styles[placement],
+        styles[`size-${size}`],
+        className,
+      )}
+      aria-labelledby={resolvedLabelledBy}
+      aria-describedby={description ? descriptionId : undefined}
+      aria-label={resolvedLabelledBy ? undefined : ariaLabel}
       onCancel={handleCancel}
       onClose={handleClose}
       onClick={handleClick}
       {...props}
     >
-      {(title || showCloseButton) && (
+      {hasHeader && (
         <header className={styles.header}>
-          {title && (
-            <h2 id={titleId} className={styles.title}>
-              {title}
-            </h2>
-          )}
+          <div className={styles.headerContent}>
+            {header ?? (
+              <>
+                {title && (
+                  <h2 id={titleId} className={styles.title}>
+                    {title}
+                  </h2>
+                )}
+
+                {description && (
+                  <p id={descriptionId} className={styles.description}>
+                    {description}
+                  </p>
+                )}
+              </>
+            )}
+          </div>
 
           {showCloseButton && (
             <button
               type="button"
               className={styles.closeButton}
               aria-label={closeButtonAriaLabel}
-              onClick={onClose}
+              onClick={() => onCloseRef.current()}
             >
               {closeIcon ?? <DefaultCloseIcon />}
             </button>
@@ -154,6 +203,8 @@ const Modal = ({
       )}
 
       <div className={styles.content}>{children}</div>
+
+      {footer != null && <footer className={styles.footer}>{footer}</footer>}
     </dialog>
   );
 };
