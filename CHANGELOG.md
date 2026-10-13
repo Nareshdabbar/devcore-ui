@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.8](https://github.com/Nareshdabbar/devcore-ui/compare/v1.3.7...v1.3.8) (2026-10-13)
+
+
+### Bug Fixes
+
+* **checkbox:** make text line height configurable ([66591eb](https://github.com/Nareshdabbar/devcore-ui/commit/66591ebbc25c47b137594806d32f075ad6459db6))
+* **checkbox:** normalize default text line height ([6b14799](https://github.com/Nareshdabbar/devcore-ui/commit/6b14799f848d1c595bca5d5bc7036b4c6cf4e62d))
+
 ### [1.3.7](https://github.com/Nareshdabbar/devcore-ui/compare/v1.3.5...v1.3.7) (2026-10-09)
 
 ### [1.3.5](https://github.com/Nareshdabbar/devcore-ui/compare/v1.3.4...v1.3.5) (2026-10-09)
