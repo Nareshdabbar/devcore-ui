@@ -28,6 +28,7 @@
   box-sizing: border-box;
   width: 18px;
   height: 18px;
+  flex: 0 0 auto;
   cursor: pointer;
   accent-color: var(--colors-primary);
   transition: opacity var(--motion-fast) var(--motion-easing);
@@ -45,6 +46,7 @@
 
 .label {
   font-size: var(--typography-body-fontSize);
+  line-height: normal;
   color: var(--colors-textPrimary);
   cursor: pointer;
   user-select: none;
@@ -63,9 +65,11 @@
 .error {
   color: var(--colors-error);
   font-size: var(--typography-caption-fontSize);
+  line-height: normal;
 }
 
 .helperText {
   color: var(--colors-textSecondary);
   font-size: var(--typography-caption-fontSize);
+  line-height: normal;
 }
