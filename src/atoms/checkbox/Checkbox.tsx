@@ -14,6 +14,10 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
   wrapperClassName?: string;
   direction?: CheckboxDirection;
   gap?: CheckboxGap;
+  /** Optional line height for the label. Defaults to normal browser typography. */
+  labelLineHeight?: React.CSSProperties["lineHeight"];
+  /** Optional line height for helper and error text. Defaults to normal browser typography. */
+  messageLineHeight?: React.CSSProperties["lineHeight"];
 }
 
 const Checkbox = ({
@@ -26,6 +30,8 @@ const Checkbox = ({
   required,
   direction = "row",
   gap = "sm",
+  labelLineHeight,
+  messageLineHeight,
   ...props
 }: CheckboxProps) => {
   const generatedId = React.useId();
@@ -59,7 +65,11 @@ const Checkbox = ({
         />
 
         {label && (
-          <label htmlFor={checkboxId} className={styles.label}>
+          <label
+            htmlFor={checkboxId}
+            className={styles.label}
+            style={labelLineHeight === undefined ? undefined : { lineHeight: labelLineHeight }}
+          >
             {label}
 
             {required && (
@@ -72,13 +82,22 @@ const Checkbox = ({
       </div>
 
       {error && (
-        <div className={styles.error} id={errorId} role="alert">
+        <div
+          className={styles.error}
+          id={errorId}
+          role="alert"
+          style={messageLineHeight === undefined ? undefined : { lineHeight: messageLineHeight }}
+        >
           {error}
         </div>
       )}
 
       {helperText && !error && (
-        <div className={styles.helperText} id={helperId}>
+        <div
+          className={styles.helperText}
+          id={helperId}
+          style={messageLineHeight === undefined ? undefined : { lineHeight: messageLineHeight }}
+        >
           {helperText}
         </div>
       )}
