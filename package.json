@@ -12,6 +12,8 @@
       "require": "./dist/index.js"
     },
     "./styles": "./dist/index.css",
+    "./breakpoints": "./src/theme/breakpoints.scss",
+    "./theme/*": "./src/theme/*",
     "./dist/*": "./dist/*"
   },
   "sideEffects": [
