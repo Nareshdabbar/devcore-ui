@@ -2,7 +2,11 @@
   display: inline-flex;
   align-items: center;
   gap: var(--radio-gap, var(--spacing-sm));
+
   width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+
   color: var(--colors-textPrimary);
   font-size: var(--typography-bodySmall-fontSize);
   line-height: var(--typography-bodySmall-lineHeight);
@@ -26,8 +30,10 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+
   width: var(--radio-size, var(--spacing-lg));
   height: var(--radio-size, var(--spacing-lg));
+
   border: var(--border-width) var(--border-style) var(--colors-border-strong);
   border-radius: var(--radius-pill);
   background: var(--colors-surface);

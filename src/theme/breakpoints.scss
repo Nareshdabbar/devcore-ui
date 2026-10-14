@@ -1,0 +1,37 @@
+@use "sass:map";
+@use "./variables" as tokens;
+
+/* Responsive Breakpoints */
+
+$breakpoints: (
+  xs: tokens.$breakpoint-xs,
+  sm: tokens.$breakpoint-sm,
+  md: tokens.$breakpoint-md,
+  lg: tokens.$breakpoint-lg,
+  xl: tokens.$breakpoint-xl,
+  2xl: tokens.$breakpoint-2xl,
+);
+
+/* Mobile-first: apply styles from the selected width upward. */
+
+@mixin up($name) {
+  @if map.has-key($breakpoints, $name) {
+    @media (min-width: map.get($breakpoints, $name)) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint '#{$name}'. Available: xs, sm, md, lg, xl, 2xl.";
+  }
+}
+
+/* Apply styles below the selected breakpoint. */
+
+@mixin down($name) {
+  @if map.has-key($breakpoints, $name) {
+    @media (max-width: calc(#{map.get($breakpoints, $name)} - 0.02px)) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint '#{$name}'. Available: xs, sm, md, lg, xl, 2xl.";
+  }
+}

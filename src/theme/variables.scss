@@ -83,3 +83,14 @@ $motion-fast: 150ms;
 $motion-normal: 250ms;
 $motion-slow: 400ms;
 $motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+
+/* Responsive Breakpoints */
+/* Mobile-first minimum viewport widths */
+
+$breakpoint-xs: 480px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;

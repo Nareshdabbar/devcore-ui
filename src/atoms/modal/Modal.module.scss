@@ -1,8 +1,9 @@
+@use "../../theme/breakpoints" as bp;
+
 .modal {
   position: fixed;
   inset: 0;
 
- 
   flex-direction: column;
 
   box-sizing: border-box;
@@ -23,9 +24,11 @@
 
   box-shadow: var(--shadow-lg);
 }
+
 .modal[open] {
   display: flex;
 }
+
 .modal::backdrop {
   background: var(--colors-overlay);
 }
@@ -212,7 +215,7 @@
   background: var(--colors-surface);
 }
 
-@media (max-width: 640px) {
+@include bp.down(sm) {
   .modal {
     width: calc(100% - var(--spacing-md));
     max-height: calc(100dvh - var(--spacing-md));
