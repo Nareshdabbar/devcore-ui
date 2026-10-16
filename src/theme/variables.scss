@@ -1,3 +1,5 @@
+@use "./breakpoints" as breakpointTokens;
+
 /* Typography */
 
 $font-family: Inter, system-ui, sans-serif;
@@ -23,13 +25,11 @@ $line-height-body-small: 20px;
 $line-height-caption: 16px;
 $line-height-button: 20px;
 
-
 $letter-spacing-title: -0.02em;
 
 $letter-spacing-section-title: -0.01em;
 
 $letter-spacing-subsection: -0.01em;
-
 
 /* Spacing */
 
@@ -84,13 +84,12 @@ $motion-normal: 250ms;
 $motion-slow: 400ms;
 $motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
 
-
 /* Responsive Breakpoints */
 /* Mobile-first minimum viewport widths */
 
-$breakpoint-xs: 480px;
-$breakpoint-sm: 640px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
-$breakpoint-2xl: 1536px;
+$breakpoint-xs: breakpointTokens.$breakpoint-xs;
+$breakpoint-sm: breakpointTokens.$breakpoint-sm;
+$breakpoint-md: breakpointTokens.$breakpoint-md;
+$breakpoint-lg: breakpointTokens.$breakpoint-lg;
+$breakpoint-xl: breakpointTokens.$breakpoint-xl;
+$breakpoint-2xl: breakpointTokens.$breakpoint-2xl;
