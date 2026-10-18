@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.13](https://github.com/Nareshdabbar/devcore-ui/compare/v1.3.12...v1.3.13) (2026-10-18)
+
+
+### Bug Fixes
+
+* align badge and radio styles with theme tokens ([8c60bbf](https://github.com/Nareshdabbar/devcore-ui/commit/8c60bbf4960b400eb70055357dcb44f7a9f840a5))
+
 ### [1.3.12](https://github.com/Nareshdabbar/devcore-ui/compare/v1.3.11...v1.3.12) (2026-10-18)
 
 ### [1.3.11](https://github.com/Nareshdabbar/devcore-ui/compare/v1.3.10...v1.3.11) (2026-10-16)
