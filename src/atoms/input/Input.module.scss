@@ -43,8 +43,7 @@
 
   padding: var(--spacing-sm) var(--spacing-md);
 
-  border: var(--border-width) var(--border-style)
-    var(--colors-border);
+  border: var(--border-width) var(--border-style) var(--colors-border);
   border-radius: var(--radius-md);
 
   background: var(--colors-surface);
@@ -67,8 +66,7 @@
   &:focus {
     outline: none;
     border-color: var(--colors-focus);
-    box-shadow: 0 0 0 var(--focus-ring-width)
-      var(--colors-focus);
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--colors-focus);
   }
 
   &:disabled {
@@ -94,17 +92,11 @@
 }
 
 .hasLeftIcon {
-  padding-left: calc(
-    var(--spacing-md) + var(--input-icon-size, var(--spacing-lg)) +
-      var(--input-icon-gap, var(--spacing-sm))
-  );
+  padding-left: calc(var(--spacing-md) + var(--input-icon-size, var(--spacing-lg)) + var(--input-icon-gap, var(--spacing-sm)));
 }
 
 .hasRightIcon {
-  padding-right: calc(
-    var(--spacing-md) + var(--input-icon-size, var(--spacing-lg)) +
-      var(--input-icon-gap, var(--spacing-sm))
-  );
+  padding-right: calc(var(--spacing-md) + var(--input-icon-size, var(--spacing-lg)) + var(--input-icon-gap, var(--spacing-sm)));
 }
 
 .leftIcon,
@@ -139,8 +131,8 @@
   align-items: center;
   justify-content: center;
 
-  width: var(--control-height-sm);
-  height: var(--control-height-sm);
+  width: var(--components-control-height-sm);
+  height: var(--components-control-height-sm);
 
   padding: 0;
 
@@ -164,8 +156,7 @@
   }
 
   &:focus-visible {
-    outline: var(--focus-ring-width) var(--border-style)
-      var(--colors-focus);
+    outline: var(--focus-ring-width) var(--border-style) var(--colors-focus);
     outline-offset: var(--spacing-xxs);
   }
 
@@ -180,8 +171,7 @@
 
   &:focus {
     border-color: var(--colors-error);
-    box-shadow: 0 0 0 var(--focus-ring-width)
-      var(--colors-error);
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--colors-error);
   }
 }
 

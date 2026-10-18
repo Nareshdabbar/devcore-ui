@@ -4,31 +4,29 @@
 
 $font-family: Inter, system-ui, sans-serif;
 
-$font-size-title: 32px;
-$font-size-section-title: 24px;
-$font-size-subsection: 20px;
-$font-size-body: 16px;
-$font-size-body-small: 14px;
-$font-size-caption: 12px;
-$font-size-button: 14px;
+$font-size-title: clamp(1.75rem, 1.5rem + 1.25vw, 2rem);
+$font-size-section-title: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+$font-size-subsection: clamp(1.125rem, 1.05rem + 0.375vw, 1.25rem);
+$font-size-body: 1rem;
+$font-size-body-small: 0.875rem;
+$font-size-caption: 0.75rem;
+$font-size-button: 0.875rem;
 
 $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
-$line-height-title: 40px;
-$line-height-section-title: 32px;
-$line-height-subsection: 28px;
-$line-height-body: 24px;
-$line-height-body-small: 20px;
-$line-height-caption: 16px;
-$line-height-button: 20px;
+$line-height-title: normal;
+$line-height-section-title: normal;
+$line-height-subsection: normal;
+$line-height-body: normal;
+$line-height-body-small: normal;
+$line-height-caption: normal;
+$line-height-button: normal;
 
 $letter-spacing-title: -0.02em;
-
 $letter-spacing-section-title: -0.01em;
-
 $letter-spacing-subsection: -0.01em;
 
 /* Spacing */
@@ -60,6 +58,7 @@ $shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.15);
 $border-width: 1px;
 $border-style: solid;
 $focus-ring-width: 3px;
+
 /* Z-Index */
 
 $z-index-dropdown: 1000;
@@ -67,8 +66,6 @@ $z-index-modal: 1300;
 $z-index-tooltip: 1500;
 
 /* Component Sizes */
-
-$component-button-height: 40px;
 $control-height-sm: 32px;
 $control-height-md: 40px;
 $control-height-lg: 48px;
@@ -85,7 +82,6 @@ $motion-slow: 400ms;
 $motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
 
 /* Responsive Breakpoints */
-/* Mobile-first minimum viewport widths */
 
 $breakpoint-xs: breakpointTokens.$breakpoint-xs;
 $breakpoint-sm: breakpointTokens.$breakpoint-sm;
@@ -93,3 +89,103 @@ $breakpoint-md: breakpointTokens.$breakpoint-md;
 $breakpoint-lg: breakpointTokens.$breakpoint-lg;
 $breakpoint-xl: breakpointTokens.$breakpoint-xl;
 $breakpoint-2xl: breakpointTokens.$breakpoint-2xl;
+
+
+
+
+
+// @use "./breakpoints" as breakpointTokens;
+
+// /* Typography */
+
+// $font-family: Inter, system-ui, sans-serif;
+
+// $font-size-title: 32px;
+// $font-size-section-title: 24px;
+// $font-size-subsection: 20px;
+// $font-size-body: 16px;
+// $font-size-body-small: 14px;
+// $font-size-caption: 12px;
+// $font-size-button: 14px;
+
+// $font-weight-regular: 400;
+// $font-weight-medium: 500;
+// $font-weight-semibold: 600;
+// $font-weight-bold: 700;
+
+// $line-height-title: 40px;
+// $line-height-section-title: 32px;
+// $line-height-subsection: 28px;
+// $line-height-body: 24px;
+// $line-height-body-small: 20px;
+// $line-height-caption: 16px;
+// $line-height-button: 20px;
+
+// $letter-spacing-title: -0.02em;
+
+// $letter-spacing-section-title: -0.01em;
+
+// $letter-spacing-subsection: -0.01em;
+
+// /* Spacing */
+
+// $spacing-xxs: 2px;
+// $spacing-xs: 4px;
+// $spacing-sm: 8px;
+// $spacing-md: 16px;
+// $spacing-lg: 24px;
+// $spacing-xl: 32px;
+
+// /* Radius */
+
+// $radius-none: 0;
+// $radius-sm: 4px;
+// $radius-md: 8px;
+// $radius-lg: 12px;
+// $radius-pill: 9999px;
+
+// /* Shadow */
+
+// $shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+// $shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+// $shadow-md: 0 4px 10px rgba(0, 0, 0, 0.12);
+// $shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+// /* Border */
+
+// $border-width: 1px;
+// $border-style: solid;
+// $focus-ring-width: 3px;
+// /* Z-Index */
+
+// $z-index-dropdown: 1000;
+// $z-index-modal: 1300;
+// $z-index-tooltip: 1500;
+
+// /* Component Sizes */
+
+// $component-button-height: 40px;
+// $control-height-sm: 32px;
+// $control-height-md: 40px;
+// $control-height-lg: 48px;
+
+// /* Component States */
+
+// $opacity-disabled: 0.6;
+
+// /* Motion */
+
+// $motion-fast: 150ms;
+// $motion-normal: 250ms;
+// $motion-slow: 400ms;
+// $motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+// /* Responsive Breakpoints */
+// /* Mobile-first minimum viewport widths */
+
+// $breakpoint-xs: breakpointTokens.$breakpoint-xs;
+// $breakpoint-sm: breakpointTokens.$breakpoint-sm;
+// $breakpoint-md: breakpointTokens.$breakpoint-md;
+// $breakpoint-lg: breakpointTokens.$breakpoint-lg;
+// $breakpoint-xl: breakpointTokens.$breakpoint-xl;
+// $breakpoint-2xl: breakpointTokens.$breakpoint-2xl;
